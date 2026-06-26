@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Labour Management | CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f7f9fb",
+                    "border-subtle": "#E2E8F0",
+                    "secondary": "#9d4300",
+                    "surface-container-low": "#f2f4f6",
+                    "on-background": "#191c1e",
+                    "surface-container": "#eceef0",
+                    "outline-variant": "#c6c6cd",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#271901",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#eff1f3",
+                    "status-completed": "#3B82F6",
+                    "on-primary-fixed": "#131b2e",
+                    "error": "#ba1a1a",
+                    "primary-container": "#131b2e",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-secondary-container": "#5c2400",
+                    "inverse-primary": "#bec6e0",
+                    "surface-tint": "#565e74",
+                    "surface-variant": "#e0e3e5",
+                    "primary": "#000000",
+                    "inverse-surface": "#2d3133",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#341100",
+                    "on-primary-container": "#7c839b",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "on-secondary-fixed-variant": "#783200",
+                    "text-main": "#1E293B",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "text-muted": "#64748B",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-highest": "#e0e3e5",
+                    "secondary-container": "#fd761a",
+                    "secondary-fixed": "#ffdbca",
+                    "tertiary-container": "#271901",
+                    "tertiary": "#000000",
+                    "outline": "#76777d",
+                    "on-surface-variant": "#45464d",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "on-error": "#ffffff",
+                    "status-active": "#22C55E",
+                    "on-secondary": "#ffffff",
+                    "status-on-hold": "#FACC15",
+                    "on-tertiary-container": "#98805d",
+                    "surface-bright": "#f7f9fb",
+                    "on-surface": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "table-row-standard": "12px",
+                    "table-row-condensed": "8px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "title-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .sidebar-item-active { background-color: #e6e8ea; font-weight: 700; color: #000000; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.5); }
+        input:focus, select:focus { outline: none; border-color: #0f172a; ring: 2px solid rgba(15, 23, 42, 0.1); }
+        .high-density-table th, .high-density-table td { padding: 8px 16px; }
+    </style>
+</head>
+<body class="flex min-h-screen text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] flex flex-col border-r border-border-subtle bg-surface z-50">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted">Infrastructure Management</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-md font-label-md">Workforce</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 sidebar-item-active rounded-lg" href="#">
+<span class="material-symbols-outlined">engineering</span>
+<span class="text-label-md font-label-md">Labour Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">foundation</span>
+<span class="text-label-md font-label-md">Site Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="text-label-md font-label-md">Project Planning</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="text-label-md font-label-md">Equipment</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-label-md font-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-label-md font-label-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="text-label-md font-label-md">Safety Compliance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-subtle">
+<button class="w-full py-2.5 bg-secondary-container text-white rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Project
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] flex-1 flex flex-col">
+<!-- TopNavBar -->
+<header class="h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md flex items-center justify-between px-container-padding border-b border-border-subtle">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-body-md" placeholder="Search labour records, sites, or tasks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-text-muted hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-body-md">Support</span>
+</button>
+<button class="relative text-text-muted hover:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full border-2 border-surface"></span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-border-subtle">
+<div class="text-right">
+<p class="text-label-sm font-label-sm text-text-main">Vikas Khanna</p>
+<p class="text-[10px] text-text-muted uppercase tracking-wider">Site Engineer</p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover border-2 border-border-subtle" data-alt="A professional headshot of a middle-aged South Asian male site engineer wearing a white hard hat and a reflective safety vest, smiling confidently against a blurred construction site background with cranes and steel structures. The lighting is bright and professional, adhering to a high-end corporate ERP aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu7SN9vGsQot5R-g7gLt-b12mzU-kV3lE9Yc_LI3Hlls_t4n6eV4xiMYzWvJ6cFMSe6MxsGGGrVq-sVLAbHRTnfYKQkckA-MJNsAEX21COL3mu52_SKYiaWP3UuhjOf6WQoFUf66h6cSDbyjGXpbvN2vSuu-XFXbpr_eg470CvMA4pRiXci-6XCE5H_Fi51ZAOvS2QqamFzbXb6ejCPseJxyFIWRrRUwNBBzOKItdQrxl9Z0JnDClrsxwvTEKKVcgM8zme4_7GiA"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-container-padding space-y-8 animate-in fade-in duration-700">
+<!-- Header Section -->
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-text-main">Labour Management</h2>
+<p class="text-body-md text-text-muted">Monitor attendance, daily wages, and workforce distribution across sites.</p>
+</div>
+<div class="flex gap-3">
+<div class="bg-white px-4 py-2 rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">calendar_today</span>
+<div>
+<p class="text-[10px] text-text-muted uppercase font-bold tracking-tight">Current Date</p>
+<p class="text-body-md font-bold">Oct 24, 2023</p>
+</div>
+</div>
+<button class="bg-primary text-white px-6 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-gray-800 transition-all shadow-lg shadow-black/5">
+<span class="material-symbols-outlined">save</span>
+                        Save Attendance
+                    </button>
+</div>
+</div>
+<!-- Summary Cards (Bento Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle relative overflow-hidden group hover:border-primary-container transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-container/10 rounded-lg text-primary-container">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-status-active text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                            +4%
+                        </span>
+</div>
+<p class="text-text-muted text-label-md">Total Labour</p>
+<p class="text-display font-display text-text-main">1,248</p>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle relative overflow-hidden group hover:border-status-active transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-status-active/10 rounded-lg text-status-active">
+<span class="material-symbols-outlined">person_check</span>
+</div>
+<span class="text-status-active text-label-sm font-bold">92% Capacity</span>
+</div>
+<p class="text-text-muted text-label-md">Present Today</p>
+<p class="text-display font-display text-text-main">1,152</p>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle relative overflow-hidden group hover:border-error transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/10 rounded-lg text-error">
+<span class="material-symbols-outlined">person_off</span>
+</div>
+<span class="text-error text-label-sm font-bold">96 Missing</span>
+</div>
+<p class="text-text-muted text-label-md">Absent</p>
+<p class="text-display font-display text-text-main">96</p>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle relative overflow-hidden group hover:border-secondary transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg text-secondary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-text-muted text-label-sm font-bold">Avg ₹650/day</span>
+</div>
+<p class="text-text-muted text-label-md">Today's Daily Wage</p>
+<p class="text-display font-display text-text-main">₹7.4L</p>
+</div>
+</div>
+<!-- Management Section -->
+<div class="bg-white rounded-xl shadow-sm border border-border-subtle overflow-hidden">
+<!-- Toolbar -->
+<div class="p-4 border-b border-border-subtle flex flex-wrap items-center justify-between gap-4 bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<select class="pl-4 pr-10 py-2 border border-border-subtle rounded-lg text-body-md font-medium appearance-none bg-no-repeat bg-[right_12px_center] hover:bg-surface-container transition-colors" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')">
+<option>All Construction Sites</option>
+<option>Sky Tower Phase 1</option>
+<option>Central Bridge Project</option>
+<option>Riverfront Extension</option>
+</select>
+<select class="pl-4 pr-10 py-2 border border-border-subtle rounded-lg text-body-md font-medium appearance-none bg-no-repeat bg-[right_12px_center] hover:bg-surface-container transition-colors" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748B%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E')">
+<option>All Categories</option>
+<option>Skilled</option>
+<option>Unskilled</option>
+<option>Supervisor</option>
+</select>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-low text-text-main px-4 py-2 rounded-lg font-semibold flex items-center gap-2 border border-border-subtle hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                            Upload Group Photo
+                        </button>
+<button class="bg-surface-container-low text-text-main px-4 py-2 rounded-lg font-semibold flex items-center gap-2 border border-border-subtle hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left high-density-table">
+<thead class="border-b border-border-subtle bg-surface-container-lowest">
+<tr>
+<th class="text-label-sm text-text-muted uppercase">Labour ID</th>
+<th class="text-label-sm text-text-muted uppercase">Worker Details</th>
+<th class="text-label-sm text-text-muted uppercase">Category</th>
+<th class="text-label-sm text-text-muted uppercase">Assigned Site</th>
+<th class="text-label-sm text-text-muted uppercase">Attendance</th>
+<th class="text-label-sm text-text-muted uppercase text-right">Daily Wage</th>
+<th class="text-label-sm text-text-muted uppercase text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="font-mono text-label-md text-text-muted">LAB-2023-441</td>
+<td>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-[12px]">RM</div>
+<div>
+<p class="text-body-md font-bold text-text-main">Rajesh Mishra</p>
+<p class="text-[11px] text-text-muted">UID: 4421-3329-XXXX</p>
+</div>
+</div>
+</td>
+<td>
+<span class="px-2 py-0.5 bg-blue-50 text-blue-700 text-[11px] font-bold rounded uppercase border border-blue-100">Skilled</span>
+</td>
+<td class="text-body-md text-text-main">Sky Tower Phase 1</td>
+<td>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-status-active"></div>
+</label>
+<span class="text-body-md font-medium text-status-active">Present</span>
+</div>
+</td>
+<td class="text-body-md font-bold text-text-main text-right">₹850.00</td>
+<td class="text-center">
+<button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="font-mono text-label-md text-text-muted">LAB-2023-442</td>
+<td>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center font-bold text-[12px]">SK</div>
+<div>
+<p class="text-body-md font-bold text-text-main">Sunil Kumar</p>
+<p class="text-[11px] text-text-muted">UID: 8872-1102-XXXX</p>
+</div>
+</div>
+</td>
+<td>
+<span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-[11px] font-bold rounded uppercase border border-gray-200">Unskilled</span>
+</td>
+<td class="text-body-md text-text-main">Sky Tower Phase 1</td>
+<td>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-status-active"></div>
+</label>
+<span class="text-body-md font-medium text-error">Absent</span>
+</div>
+</td>
+<td class="text-body-md font-bold text-text-main text-right">₹500.00</td>
+<td class="text-center">
+<button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="font-mono text-label-md text-text-muted">LAB-2023-443</td>
+<td>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-bold text-[12px]">AY</div>
+<div>
+<p class="text-body-md font-bold text-text-main">Amit Yadav</p>
+<p class="text-[11px] text-text-muted">UID: 3033-9112-XXXX</p>
+</div>
+</div>
+</td>
+<td>
+<span class="px-2 py-0.5 bg-blue-50 text-blue-700 text-[11px] font-bold rounded uppercase border border-blue-100">Skilled</span>
+</td>
+<td class="text-body-md text-text-main">Sky Tower Phase 1</td>
+<td>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-status-active"></div>
+</label>
+<span class="text-body-md font-medium text-status-active">Present</span>
+</div>
+</td>
+<td class="text-body-md font-bold text-text-main text-right">₹900.00</td>
+<td class="text-center">
+<button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="font-mono text-label-md text-text-muted">LAB-2023-444</td>
+<td>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-[12px]">MS</div>
+<div>
+<p class="text-body-md font-bold text-text-main">Mahesh Singh</p>
+<p class="text-[11px] text-text-muted">UID: 9918-2273-XXXX</p>
+</div>
+</div>
+</td>
+<td>
+<span class="px-2 py-0.5 bg-purple-50 text-purple-700 text-[11px] font-bold rounded uppercase border border-purple-100">Supervisor</span>
+</td>
+<td class="text-body-md text-text-main">Riverfront Extension</td>
+<td>
+<div class="flex items-center gap-4">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-status-active"></div>
+</label>
+<span class="text-body-md font-medium text-status-active">Present</span>
+</div>
+</td>
+<td class="text-body-md font-bold text-text-main text-right">₹1,200.00</td>
+<td class="text-center">
+<button class="text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Footer -->
+<div class="p-4 bg-surface-container-lowest border-t border-border-subtle flex items-center justify-between">
+<p class="text-label-md text-text-muted">Showing 1-10 of 1,248 labour records</p>
+<div class="flex items-center gap-2">
+<button class="p-2 border border-border-subtle rounded-lg hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 bg-primary text-white rounded-lg text-label-md font-bold">1</button>
+<button class="px-3 py-1 hover:bg-surface-container rounded-lg text-label-md">2</button>
+<button class="px-3 py-1 hover:bg-surface-container rounded-lg text-label-md">3</button>
+<span class="text-text-muted">...</span>
+<button class="px-3 py-1 hover:bg-surface-container rounded-lg text-label-md">125</button>
+<button class="p-2 border border-border-subtle rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Verification & Photo Section (Asymmetric Side Info) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-border-subtle p-6 flex items-center gap-8">
+<div class="flex-1">
+<h3 class="text-title-lg font-title-lg mb-2">Daily Attendance Verification</h3>
+<p class="text-body-md text-text-muted mb-4">Please upload a group photo of the site workforce for today's verification. AI will match faces with records to prevent proxy attendance.</p>
+<div class="flex gap-4">
+<button class="bg-primary text-white px-6 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-gray-800 transition-all">
+<span class="material-symbols-outlined">cloud_upload</span>
+                                Select Media
+                            </button>
+<p class="text-label-md text-text-muted flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-active">check_circle</span>
+                                Last uploaded: 08:30 AM today
+                            </p>
+</div>
+</div>
+<div class="w-48 h-32 rounded-lg bg-surface border-2 border-dashed border-border-subtle flex items-center justify-center relative group overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" data-alt="A high-resolution group photo of construction workers standing in front of a modern steel framework building. They are wearing high-visibility orange safety vests and yellow hard hats. The lighting is natural morning sunlight, casting soft shadows, representing a legitimate daily verification photo for an ERP system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBonOWxPCuAD3nfjuIfKV7KNq0QBN3uh3O4PmkRXGv_3Eutyn-DgkfUIYHOMaYFu53hRdXzHwu-4S7tpznU0DrlvAsJlGsCMFcB0Vj_6IucNBGSnI8pdaRB-RPr3F7QTvZqCyASCWIEFURK2ydQzP2HbBHy3PFWmoJHTzElXeoLsyk8ykjy_85hKtGEm2svnEJ00hs6xU9MbCU-kyWa2Yq0e2y_4XbNYWliXA7BS3EjZlP_WuJUfjGu0juSzHwuoDIvwyE1m5Jw_A"/>
+<span class="material-symbols-outlined text-text-muted group-hover:hidden">add_a_photo</span>
+</div>
+</div>
+<div class="bg-secondary-container rounded-xl shadow-lg border border-secondary text-white p-6 relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+<h3 class="text-title-lg font-title-lg mb-1">Wage Distribution</h3>
+<p class="text-body-md opacity-80 mb-6">Budgeted vs. Actuals</p>
+<div class="space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-label-md font-bold">
+<span>Budget Utilization</span>
+<span>78%</span>
+</div>
+<div class="h-2 bg-black/20 rounded-full overflow-hidden">
+<div class="h-full bg-white rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-white/10 flex justify-between items-end">
+<div>
+<p class="text-[10px] uppercase opacity-70 font-bold">Weekly Total</p>
+<p class="text-headline-md font-bold">₹42.5L</p>
+</div>
+<span class="bg-white/20 px-2 py-1 rounded text-[10px] font-bold">ON TRACK</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for the attendance toggles
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const statusSpan = this.closest('div').querySelector('span');
+                if (this.checked) {
+                    statusSpan.textContent = 'Present';
+                    statusSpan.className = 'text-body-md font-medium text-status-active';
+                } else {
+                    statusSpan.textContent = 'Absent';
+                    statusSpan.className = 'text-body-md font-medium text-error';
+                }
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/10');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/10');
+        });
+    </script>
+</body></html>

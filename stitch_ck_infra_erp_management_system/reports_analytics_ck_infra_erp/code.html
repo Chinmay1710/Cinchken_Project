@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CK Infra ERP | Reports &amp; Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-secondary-container": "#5c2400",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "surface": "#f7f9fb",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#ffdbca",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "tertiary-container": "#271901",
+                      "on-background": "#191c1e",
+                      "outline": "#76777d",
+                      "status-active": "#22C55E",
+                      "surface-container-lowest": "#ffffff",
+                      "outline-variant": "#c6c6cd",
+                      "on-primary-container": "#7c839b",
+                      "tertiary": "#000000",
+                      "surface-container-high": "#e6e8ea",
+                      "on-secondary-fixed-variant": "#783200",
+                      "on-tertiary-fixed": "#271901",
+                      "on-surface-variant": "#45464d",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#2d3133",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "status-on-hold": "#FACC15",
+                      "inverse-primary": "#bec6e0",
+                      "on-secondary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#fd761a",
+                      "text-main": "#1E293B",
+                      "border-subtle": "#E2E8F0",
+                      "secondary": "#9d4300",
+                      "error-container": "#ffdad6",
+                      "background": "#f7f9fb",
+                      "surface-container": "#eceef0",
+                      "primary-fixed": "#dae2fd",
+                      "surface-container-low": "#f2f4f6",
+                      "primary-container": "#131b2e",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-tint": "#565e74",
+                      "tertiary-fixed": "#fcdeb5",
+                      "on-primary-fixed": "#131b2e",
+                      "secondary-fixed-dim": "#ffb690",
+                      "primary": "#000000",
+                      "on-secondary-fixed": "#341100",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#98805d",
+                      "text-muted": "#64748B",
+                      "surface-bright": "#f7f9fb",
+                      "surface-dim": "#d8dadc",
+                      "surface-container-highest": "#e0e3e5",
+                      "status-completed": "#3B82F6",
+                      "on-surface": "#191c1e",
+                      "surface-variant": "#e0e3e5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "table-row-standard": "12px",
+                      "unit": "4px",
+                      "margin-desktop": "32px",
+                      "gutter": "24px",
+                      "table-row-condensed": "8px",
+                      "container-padding": "24px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "title-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .chart-bar { transition: height 1s ease-out; }
+        .heatmap-cell:hover { transform: scale(1.1); z-index: 10; cursor: pointer; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .shadow-soft { box-shadow: 0px 4px 6px rgba(15, 23, 42, 0.05); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] flex flex-col border-r border-border-subtle bg-surface z-50">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">foundation</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-sm font-label-sm text-text-muted">Infrastructure Management</p>
+</div>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary-container text-on-secondary-container py-3 px-4 rounded-xl font-title-lg text-title-lg hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Project
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-md font-label-md">Workforce</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">foundation</span>
+<span class="text-label-md font-label-md">Site Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">engineering</span>
+<span class="text-label-md font-label-md">Labour Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="text-label-md font-label-md">Project Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="text-label-md font-label-md">Equipment</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-label-md font-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-label-md font-label-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="text-label-md font-label-md">Safety Compliance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-subtle bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full border-2 border-outline-variant" data-alt="A professional headshot of a senior infrastructure engineer with graying hair, wearing a clean white shirt and a blue safety vest, neutral office background, highly detailed corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3YBoWgqemAJ2m1JY1oxx6SKejYmnkBxHLBuancVOjj2PECEgY9Nl2emP1G01Poh5KB3GDUqHVvGkdtqZcmY1qpJ-8kkM6CUq22BfMXH67RdG-1pp6MH24kC8bIrJy72rAl3u_TD79dCf1Zwrn79r7Irl0K2e9fjTvl118sh0YZCzJYIVPZHN2rYbUFK_gBA1UvzMCWcA-oBc4xMQbUkk37e8HkFOr8i7IjlTifsZo0Xzns0VOYeEyZTPPhNNSwZg68lzkV_yXfw"/>
+<div class="overflow-hidden">
+<p class="text-label-md font-label-md text-on-surface truncate">Robert Sterling</p>
+<p class="text-label-sm font-label-sm text-text-muted truncate">Senior Project Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- Top Navigation Shell -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search reports, sites, or project IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-6 w-[1px] bg-border-subtle mx-2"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-subtle hover:bg-surface-container-low transition-colors">
+<span class="text-label-md font-label-md text-text-main">Support</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-margin-desktop space-y-gutter">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-text-main">Reports &amp; Analytics</h2>
+<p class="text-body-md font-body-md text-text-muted">Consolidated performance metrics across all infrastructure sites.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-border-subtle shadow-soft">
+<span class="material-symbols-outlined text-text-muted">calendar_today</span>
+<span class="text-label-md font-label-md text-text-main">Oct 01, 2023 - Oct 31, 2023</span>
+<span class="material-symbols-outlined text-text-muted">expand_more</span>
+</div>
+<button class="flex items-center gap-2 bg-primary-container text-white px-6 py-2.5 rounded-xl font-title-lg text-title-lg hover:bg-black transition-all">
+<span class="material-symbols-outlined">add_chart</span>
+                        Generate New Report
+                    </button>
+</div>
+</div>
+<!-- Summary Cards Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-white p-5 rounded-xl border border-border-subtle shadow-soft flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+<span class="material-symbols-outlined">foundation</span>
+</div>
+<span class="text-status-active text-label-sm font-label-sm bg-green-50 px-2 py-0.5 rounded-full">+4% vs LW</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-text-muted">Avg. Site Progress</p>
+<h3 class="text-display font-display text-text-main">82%</h3>
+<div class="w-full bg-surface-container mt-2 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full" style="width: 82%"></div>
+</div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl border border-border-subtle shadow-soft flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-orange-50 text-orange-600 rounded-lg">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<span class="text-status-active text-label-sm font-label-sm bg-green-50 px-2 py-0.5 rounded-full">Optimal</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-text-muted">Workforce Efficiency</p>
+<h3 class="text-display font-display text-text-main">+12%</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Above baseline operational target</p>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl border border-border-subtle shadow-soft flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-red-50 text-red-600 rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-error text-label-sm font-label-sm bg-red-50 px-2 py-0.5 rounded-full">Caution</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-text-muted">Labour Budget Variance</p>
+<h3 class="text-display font-display text-text-main">-5%</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Under-budget by $42,500 this month</p>
+</div>
+</div>
+<div class="bg-white p-5 rounded-xl border border-border-subtle shadow-soft flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-green-50 text-green-600 rounded-lg">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<span class="text-status-active text-label-sm font-label-sm bg-green-50 px-2 py-0.5 rounded-full">Exemplary</span>
+</div>
+<div>
+<p class="text-label-md font-label-md text-text-muted">Safety Compliance</p>
+<h3 class="text-display font-display text-text-main">98%</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Target 100% | 2 Minor incidents</p>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Progress vs Financials -->
+<div class="lg:col-span-2 bg-white p-6 rounded-xl border border-border-subtle shadow-soft">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="text-title-lg font-title-lg text-text-main">Project Financials vs Progress</h4>
+<p class="text-label-sm font-label-sm text-text-muted">Comparative analysis of cost burn vs milestone completion</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-sm bg-primary-container"></span>
+<span class="text-label-sm font-label-sm">Budget Cost</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full border-2 border-secondary-container bg-white"></span>
+<span class="text-label-sm font-label-sm">Progress %</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 flex items-end justify-between px-4 pb-8 border-b border-border-subtle">
+<!-- Chart Axis Markers -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-label-sm text-text-muted pr-2">
+<span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span>
+</div>
+<!-- Visualizing bars and a simulated path -->
+<div class="flex-1 flex items-end justify-around h-full ml-10 relative">
+<div class="group relative flex flex-col items-center">
+<div class="chart-bar w-10 bg-primary-container/20 rounded-t-sm" style="height: 40%"></div>
+<div class="chart-bar w-10 bg-primary-container rounded-t-sm absolute bottom-0" style="height: 35%"></div>
+<span class="absolute -bottom-6 text-label-sm text-text-muted">Site A</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="chart-bar w-10 bg-primary-container/20 rounded-t-sm" style="height: 70%"></div>
+<div class="chart-bar w-10 bg-primary-container rounded-t-sm absolute bottom-0" style="height: 62%"></div>
+<span class="absolute -bottom-6 text-label-sm text-text-muted">Site B</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="chart-bar w-10 bg-primary-container/20 rounded-t-sm" style="height: 90%"></div>
+<div class="chart-bar w-10 bg-primary-container rounded-t-sm absolute bottom-0" style="height: 88%"></div>
+<span class="absolute -bottom-6 text-label-sm text-text-muted">Site C</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="chart-bar w-10 bg-primary-container/20 rounded-t-sm" style="height: 55%"></div>
+<div class="chart-bar w-10 bg-primary-container rounded-t-sm absolute bottom-0" style="height: 50%"></div>
+<span class="absolute -bottom-6 text-label-sm text-text-muted">Site D</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="chart-bar w-10 bg-primary-container/20 rounded-t-sm" style="height: 30%"></div>
+<div class="chart-bar w-10 bg-primary-container rounded-t-sm absolute bottom-0" style="height: 15%"></div>
+<span class="absolute -bottom-6 text-label-sm text-text-muted">Site E</span>
+</div>
+<!-- Progress line path SVG -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M 10 65 L 30 38 L 50 12 L 70 50 L 90 85" fill="none" stroke="#fd761a" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="10" cy="65" fill="#fd761a" r="2"></circle>
+<circle cx="30" cy="38" fill="#fd761a" r="2"></circle>
+<circle cx="50" cy="12" fill="#fd761a" r="2"></circle>
+<circle cx="70" cy="50" fill="#fd761a" r="2"></circle>
+<circle cx="90" cy="85" fill="#fd761a" r="2"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- Attendance Heatmap -->
+<div class="bg-white p-6 rounded-xl border border-border-subtle shadow-soft">
+<div class="mb-6">
+<h4 class="text-title-lg font-title-lg text-text-main">Attendance Heatmap</h4>
+<p class="text-label-sm font-label-sm text-text-muted">Site availability by department</p>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<div class="text-[10px] text-text-muted font-bold text-center">Mon</div>
+<div class="text-[10px] text-text-muted font-bold text-center">Tue</div>
+<div class="text-[10px] text-text-muted font-bold text-center">Wed</div>
+<div class="text-[10px] text-text-muted font-bold text-center">Thu</div>
+<div class="text-[10px] text-text-muted font-bold text-center">Fri</div>
+<div class="text-[10px] text-text-muted font-bold text-center">Sat</div>
+<div class="text-[10px] text-text-muted font-bold text-center">Sun</div>
+<!-- 4 rows of cells -->
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm" title="Civil: 100%"></div>
+<div class="heatmap-cell h-8 bg-green-400 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-600 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-yellow-400 rounded-sm" title="Logistics: 65%"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-gray-100 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-orange-400 rounded-sm" title="Electrical: 40%"></div>
+<div class="heatmap-cell h-8 bg-green-600 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-gray-100 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-600 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-yellow-400 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-gray-100 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-orange-500 rounded-sm" title="Urgent: 30%"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-600 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-green-500 rounded-sm"></div>
+<div class="heatmap-cell h-8 bg-gray-100 rounded-sm"></div>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex items-center gap-1">
+<span class="text-[10px] text-text-muted">Low</span>
+<div class="flex gap-0.5">
+<div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+<div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+<div class="w-2 h-2 bg-green-400 rounded-full"></div>
+<div class="w-2 h-2 bg-green-600 rounded-full"></div>
+</div>
+<span class="text-[10px] text-text-muted">High</span>
+</div>
+<button class="text-label-md font-label-md text-secondary hover:underline">View Legend</button>
+</div>
+</div>
+</div>
+<!-- Report Table -->
+<div class="bg-white rounded-xl border border-border-subtle shadow-soft overflow-hidden">
+<div class="p-6 border-b border-border-subtle flex justify-between items-center">
+<h4 class="text-title-lg font-title-lg text-text-main">Recent Reports</h4>
+<div class="flex gap-2">
+<button class="p-2 border border-border-subtle rounded-lg text-text-muted hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 border border-border-subtle rounded-lg text-text-muted hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-subtle">
+<th class="px-6 py-table-row-condensed text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Report Name</th>
+<th class="px-6 py-table-row-condensed text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Type</th>
+<th class="px-6 py-table-row-condensed text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Generated By</th>
+<th class="px-6 py-table-row-condensed text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Date</th>
+<th class="px-6 py-table-row-condensed text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Status</th>
+<th class="px-6 py-table-row-condensed text-label-sm font-label-sm text-text-muted uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted">description</span>
+<span class="text-body-md font-body-md text-text-main">Monthly Workforce Audit</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Labour</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-600">RS</div>
+<span class="text-body-md font-body-md text-text-main">R. Sterling</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Oct 28, 2023</td>
+<td class="px-6 py-table-row-standard">
+<span class="px-2 py-1 rounded-full text-[11px] font-semibold bg-green-50 text-status-active border border-green-100">Ready</span>
+</td>
+<td class="px-6 py-table-row-standard text-right">
+<div class="flex justify-end gap-2">
+<button class="text-secondary text-label-md font-label-md hover:underline">PDF</button>
+<button class="text-secondary text-label-md font-label-md hover:underline">CSV</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted">analytics</span>
+<span class="text-body-md font-body-md text-text-main">Q3 Financial Summary</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Financial</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-[10px] font-bold text-orange-600">SM</div>
+<span class="text-body-md font-body-md text-text-main">S. Miller</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Oct 25, 2023</td>
+<td class="px-6 py-table-row-standard">
+<span class="px-2 py-1 rounded-full text-[11px] font-semibold bg-green-50 text-status-active border border-green-100">Ready</span>
+</td>
+<td class="px-6 py-table-row-standard text-right">
+<div class="flex justify-end gap-2">
+<button class="text-secondary text-label-md font-label-md hover:underline">PDF</button>
+<button class="text-secondary text-label-md font-label-md hover:underline">CSV</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted">assignment_late</span>
+<span class="text-body-md font-body-md text-text-main">Safety Incident Log</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Safety</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-[10px] font-bold text-red-600">JP</div>
+<span class="text-body-md font-body-md text-text-main">J. Patel</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Oct 24, 2023</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-1.5">
+<div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+<span class="text-[11px] font-semibold text-status-completed">Processing</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-right">
+<button class="text-text-muted text-label-md font-label-md cursor-not-allowed" disabled="">Waiting...</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted">inventory_2</span>
+<span class="text-body-md font-body-md text-text-main">Concrete Supply chain Audit</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Inventory</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-600">AK</div>
+<span class="text-body-md font-body-md text-text-main">A. Khan</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md font-body-md text-text-muted">Oct 22, 2023</td>
+<td class="px-6 py-table-row-standard">
+<span class="px-2 py-1 rounded-full text-[11px] font-semibold bg-green-50 text-status-active border border-green-100">Ready</span>
+</td>
+<td class="px-6 py-table-row-standard text-right">
+<div class="flex justify-end gap-2">
+<button class="text-secondary text-label-md font-label-md hover:underline">PDF</button>
+<button class="text-secondary text-label-md font-label-md hover:underline">CSV</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border-subtle bg-surface-container-low flex justify-between items-center">
+<p class="text-label-sm font-label-sm text-text-muted">Showing 4 of 124 reports</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-border-subtle rounded text-label-md font-label-md disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 border border-border-subtle rounded text-label-md font-label-md hover:bg-white transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for sidebar links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelectorAll('nav a').forEach(l => {
+                    l.classList.remove('text-primary', 'font-bold', 'bg-surface-container-high');
+                    l.classList.add('text-text-muted');
+                });
+                link.classList.add('text-primary', 'font-bold', 'bg-surface-container-high');
+                link.classList.remove('text-text-muted');
+            });
+        });
+
+        // Heatmap cell interaction
+        document.querySelectorAll('.heatmap-cell').forEach(cell => {
+            cell.addEventListener('mouseenter', function() {
+                this.style.filter = 'brightness(1.2)';
+            });
+            cell.addEventListener('mouseleave', function() {
+                this.style.filter = 'brightness(1)';
+            });
+        });
+    </script>
+</body></html>

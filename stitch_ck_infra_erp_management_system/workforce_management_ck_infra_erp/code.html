@@ -1,0 +1,489 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Employee Management | CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #CBD5E1;
+        }
+        .table-sticky-header th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: white;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#98805d",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "on-error": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "error-container": "#ffdad6",
+                      "on-secondary": "#ffffff",
+                      "surface-dim": "#d8dadc",
+                      "text-muted": "#64748B",
+                      "status-completed": "#3B82F6",
+                      "primary-container": "#131b2e",
+                      "inverse-surface": "#2d3133",
+                      "surface-container-high": "#e6e8ea",
+                      "on-secondary-container": "#5c2400",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f7f9fb",
+                      "on-surface-variant": "#45464d",
+                      "inverse-primary": "#bec6e0",
+                      "surface": "#f7f9fb",
+                      "outline": "#76777d",
+                      "text-main": "#1E293B",
+                      "on-secondary-fixed": "#341100",
+                      "border-subtle": "#E2E8F0",
+                      "primary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "secondary": "#9d4300",
+                      "on-primary-container": "#7c839b",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "status-active": "#22C55E",
+                      "on-background": "#191c1e",
+                      "surface-variant": "#e0e3e5",
+                      "status-on-hold": "#FACC15",
+                      "on-secondary-fixed-variant": "#783200",
+                      "surface-tint": "#565e74",
+                      "surface-container": "#eceef0",
+                      "on-primary-fixed": "#131b2e",
+                      "primary-fixed": "#dae2fd",
+                      "tertiary-fixed": "#fcdeb5",
+                      "outline-variant": "#c6c6cd",
+                      "secondary-fixed-dim": "#ffb690",
+                      "on-tertiary-fixed": "#271901",
+                      "secondary-container": "#fd761a",
+                      "surface-bright": "#f7f9fb",
+                      "secondary-fixed": "#ffdbca",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#000000",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#271901",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "container-padding": "24px",
+                      "table-row-standard": "12px",
+                      "table-row-condensed": "8px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface custom-scrollbar overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] flex flex-col border-r border-border-subtle bg-surface z-50">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">foundation</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted">Infrastructure Management</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 overflow-y-auto custom-scrollbar space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-primary font-bold bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-label-md font-label-md">Workforce</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">foundation</span>
+<span class="text-label-md font-label-md">Site Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">engineering</span>
+<span class="text-label-md font-label-md">Labour Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="text-label-md font-label-md">Project Planning</span>
+</a>
+<div class="pt-4 pb-2 px-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-text-muted opacity-60">Resources</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="text-label-md font-label-md">Equipment</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-label-md font-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-label-md font-label-md">Financials</span>
+</a>
+<div class="pt-4 pb-2 px-4">
+<span class="text-[10px] font-bold uppercase tracking-widest text-text-muted opacity-60">Operations</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="text-label-md font-label-md">Safety Compliance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-subtle">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary text-on-primary py-2.5 rounded-lg font-semibold hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+<span>New Project</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center flex-1 max-w-2xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted transition-colors group-focus-within:text-primary">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-xl text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:bg-white transition-all" placeholder="Search employees, ID, or site..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4 ml-gutter">
+<button class="flex items-center gap-2 text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-body-md">Support</span>
+</button>
+<div class="w-px h-6 bg-border-subtle"></div>
+<button class="relative p-2 text-text-muted hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<div class="flex items-center gap-3 pl-2 group cursor-pointer">
+<div class="text-right">
+<p class="text-label-md font-bold text-on-surface">John Doe</p>
+<p class="text-[10px] text-text-muted">Operations Manager</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="A professional headshot of a corporate manager in a clean office setting, featuring soft studio lighting and a focused, modern aesthetic. The background is a blurred high-end architectural office environment with navy and slate tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYEOUzeEBbk2mbHcoXkA1SNVL7_APEGYe8eEB5kWz2qcodMqOEAlHwkX7NokNa1tvgIxCWOcKZGR2fd37Qn6XlPCMGaZXDrZMFf6Dn6Sy9NeLGTz_Jtl8O_s3sbDhKeQkQAugsrWkbwVIPZBO70OQfxSmgl4B2otzKFM2PD7xXWsYCVKfmLioc_i8jDxnK4X-hTRe3A1Rg2ohkmkJoSBVl3rARTQds_26lmhoXX_pHs5gd8hdvSRAg3DS4taJY6K4ZzyU2g6t_8Q">
+</div>
+</div>
+</header>
+<!-- Page Header & Filter Bar -->
+<div class="p-container-padding bg-white/50 space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<nav class="flex items-center gap-2 text-label-md text-text-muted mb-2">
+<span>Workforce</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-medium">Employee Directory</span>
+</nav>
+<h2 class="text-display font-display text-on-surface">Employee Management</h2>
+</div>
+<button class="flex items-center gap-2 bg-secondary text-on-primary px-6 py-2.5 rounded-xl font-bold shadow-sm hover:translate-y-[-1px] active:translate-y-0 transition-all">
+<span class="material-symbols-outlined">person_add</span>
+<span>Add Employee</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-3 p-4 bg-white border border-border-subtle rounded-xl shadow-[0px_4px_6px_rgba(15,23,42,0.05)]">
+<div class="flex flex-col gap-1.5 min-w-[180px]">
+<span class="text-label-sm uppercase tracking-wider text-text-muted px-1">Department</span>
+<select class="text-body-md border-border-subtle rounded-lg bg-surface-container-low focus:border-primary focus:ring-0 transition-colors">
+<option>All Departments</option>
+<option>Engineering</option>
+<option>Operations</option>
+<option>Site Management</option>
+<option>Safety &amp; QA</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5 min-w-[180px]">
+<span class="text-label-sm uppercase tracking-wider text-text-muted px-1">Active Site</span>
+<select class="text-body-md border-border-subtle rounded-lg bg-surface-container-low focus:border-primary focus:ring-0 transition-colors">
+<option>All Sites</option>
+<option>Dubai Marina Tower</option>
+<option>Green Valley Estate</option>
+<option>Central Metro Hub</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5 min-w-[180px]">
+<span class="text-label-sm uppercase tracking-wider text-text-muted px-1">Status</span>
+<select class="text-body-md border-border-subtle rounded-lg bg-surface-container-low focus:border-primary focus:ring-0 transition-colors">
+<option>Any Status</option>
+<option>Active</option>
+<option>On Leave</option>
+<option>Inactive</option>
+</select>
+</div>
+<div class="mt-auto ml-auto flex gap-2">
+<button class="px-4 py-2 text-body-md font-medium text-text-muted hover:bg-surface-container-low rounded-lg transition-colors">Clear Filters</button>
+<button class="px-4 py-2 text-body-md font-medium bg-primary text-on-primary rounded-lg">Export CSV</button>
+</div>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="flex-1 overflow-hidden px-container-padding pb-container-padding">
+<div class="h-full bg-white border border-border-subtle rounded-xl shadow-sm flex flex-col">
+<div class="flex-1 overflow-auto custom-scrollbar">
+<table class="w-full text-left border-collapse table-sticky-header">
+<thead>
+<tr class="border-b border-border-subtle">
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Employee ID</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Profile</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Employee Name</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Designation</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Department</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Assigned Sites</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold">Status</th>
+<th class="px-6 py-4 text-label-sm uppercase tracking-widest text-text-muted font-bold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">EMP-2024-001</td>
+<td class="px-6 py-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="A sharp, clear corporate portrait of a male civil engineer wearing a navy blazer, captured in a modern architectural setting with cool blue and grey lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhEwes9AVpHyRvHl2DvsYGnvTi2o1MUv14tr9MfHZ3QyWBddN_-aN0qnVEI2AL7cAGuu0O6a8lTFi7K8nqxAIyEBfoo4bFbc2Iin9HH1IStJbkIIjFJ_18b7JQp6WTuMOB8LajVKu_Mgpathmt-jBbDAjiVdfhxOl5rBU1Btggp2oRvzBPsMZ066UjHcHoRCvE7VzDHXPPxjJM7Etl_xc2ECMyzK9G-J7LZw7ud9DmboKFe31COsH4rKJFHqyQw0tYoZOAbi3G6Q">
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-title-lg text-on-surface font-semibold">David Richards</span>
+<span class="text-label-md text-text-muted">david.r@ckinfra.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Senior Project Lead</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-label-sm font-bold text-on-surface-variant">Operations</span>
+</td>
+<td class="px-6 py-4 text-body-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+                                            Dubai Marina Tower
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-active/10 text-status-active text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-active"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary font-bold text-label-md hover:underline underline-offset-4">View Profile</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">EMP-2024-042</td>
+<td class="px-6 py-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Professional studio portrait of a female project manager with glasses, neutral expression, set against a blurred high-tech control room background with subtle teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgRn_wFUtuKL568zxKBO3eUvcUqkGXESo0AAPhHU6tFtHWmxdnUFHhpq69Ki2P-XesBxtoRqEKwhsi-fYDSnR0eiS1kTh4UFmYci0PC1Xkt5eMxGxk2sjXQCqmYJ_pkGiVZngyexrkNQdzGybla6IUGxDYB6bUDovGwO21NGtTVtzdagbTGANPRSDP77mX7rUc6GqD78uWHl74fbbfJqe_6n1uibRl-RKigkPJmE0vnd5eGv8zbBOqCVY9TXngJfQCZQI48CZLCg">
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-title-lg text-on-surface font-semibold">Sarah Jenkins</span>
+<span class="text-label-md text-text-muted">s.jenkins@ckinfra.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Safety Compliance Officer</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-label-sm font-bold text-on-surface-variant">Safety &amp; QA</span>
+</td>
+<td class="px-6 py-4 text-body-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+                                            Central Metro Hub
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-on-hold/10 text-status-on-hold text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-on-hold"></span>
+                                            On Leave
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary font-bold text-label-md hover:underline underline-offset-4">View Profile</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">EMP-2023-112</td>
+<td class="px-6 py-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged male site architect in a white shirt and dark vest. The background shows a modern construction site at dusk with soft orange and blue highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzbEXxmcdPviDc49Ltpvk5lAUpSRdPY272lVwkvfRpeVUCoyezTZYADmJiazu_rcynca0QsE8zrkcPg7BcuePTcFWkgCLJqKja9NS2EU_Kua08RNRiQHtQYGA9uA-rby22clbolkEyV9utfdUCgPT5GbQs0lh4XQYywlWItrTkBbzWdlPdGJe1Sh4rRgOZB0S3esoU3_xSnmQv_N9BHld9umXXFqyB1pT-N6O_yUEYxjjYBUTNjJSgcblPg5dMoxD-QwJelTr-pQ">
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-title-lg text-on-surface font-semibold">Michael Chen</span>
+<span class="text-label-md text-text-muted">m.chen@ckinfra.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Structural Architect</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-label-sm font-bold text-on-surface-variant">Engineering</span>
+</td>
+<td class="px-6 py-4 text-body-md">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+                                            Green Valley Estate
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-active/10 text-status-active text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-status-active"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary font-bold text-label-md hover:underline underline-offset-4">View Profile</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-mono text-label-md">EMP-2023-098</td>
+<td class="px-6 py-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young professional female engineer in a corporate tech setting. Minimalist office background with natural lighting and soft shadows, emphasized by clean white and slate gray tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_C2g5b1UjWG6TVYXDEmMOrvrbA5wlpQWCqCbmq07DfI18dH-Vp3D3wHFDFyMnvFCGchENVUgZ3t1DPfc3ir9mV59hSM6liTqFzAD8K30aUPN8nBig_QBnrilLP_DHd-q_qfZ-D2f9lTJncEaMGbO4KDov8XIKzxJnu6arujINmzfM-rhVvG4pOvJKLqgxzTWh0GqkuQI6Gi09vy8i8k1CMmBJElMCG6AvJehaySFrXUNS_vSUbJUEZ37gFq8wO-48eLdU2Rojyw">
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-title-lg text-on-surface font-semibold">Amelia Watson</span>
+<span class="text-label-md text-text-muted">a.watson@ckinfra.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md text-on-surface-variant">Procurement Specialist</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-surface-container text-label-sm font-bold text-on-surface-variant">Operations</span>
+</td>
+<td class="px-6 py-4 text-body-md text-text-muted">— Unassigned —</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-on-surface-variant/10 text-on-surface-variant text-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>
+                                            Inactive
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary font-bold text-label-md hover:underline underline-offset-4">View Profile</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 border-t border-border-subtle flex justify-between items-center bg-surface-container-lowest">
+<span class="text-label-md text-text-muted">Showing 1 to 4 of 124 employees</span>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded-md hover:bg-surface-container text-text-muted disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-md bg-primary text-on-primary text-label-md font-bold">1</button>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container text-label-md">2</button>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container text-label-md">3</button>
+<span class="px-1 text-text-muted">...</span>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container text-label-md">31</button>
+<button class="p-1 rounded-md hover:bg-surface-container text-text-muted">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dropdown hover effects or logic can be added here
+            console.log('CK Infra ERP Employee Management Loaded');
+
+            // Quick search filter logic placeholder
+            const searchInput = document.querySelector('input[type="text"]');
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const rows = document.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const text = row.innerText.toLowerCase();
+                    row.style.display = text.includes(term) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+</body></html>

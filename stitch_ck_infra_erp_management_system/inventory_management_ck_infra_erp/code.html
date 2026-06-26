@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management | CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fd761a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#783200",
+                    "primary-fixed-dim": "#bec6e0",
+                    "background": "#f7f9fb",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed": "#fcdeb5",
+                    "inverse-primary": "#bec6e0",
+                    "on-tertiary-fixed": "#271901",
+                    "border-subtle": "#E2E8F0",
+                    "inverse-surface": "#2d3133",
+                    "outline": "#76777d",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#000000",
+                    "status-on-hold": "#FACC15",
+                    "secondary": "#9d4300",
+                    "secondary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#ffdbca",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "status-active": "#22C55E",
+                    "text-muted": "#64748B",
+                    "on-secondary-container": "#5c2400",
+                    "on-primary-container": "#7c839b",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary": "#000000",
+                    "surface-container-low": "#f2f4f6",
+                    "surface": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-high": "#e6e8ea",
+                    "on-tertiary-container": "#98805d",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "on-secondary-fixed": "#341100",
+                    "status-completed": "#3B82F6",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c6c6cd",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#131b2e",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#271901",
+                    "text-main": "#1E293B",
+                    "primary-fixed": "#dae2fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "table-row-condensed": "8px",
+                    "unit": "4px",
+                    "table-row-standard": "12px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "32px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "title-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .custom-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Shell Layout -->
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-surface dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flex flex-col z-50">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">foundation</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface dark:text-inverse-on-surface leading-tight">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted">Infrastructure Management</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-2 space-y-1 overflow-y-auto scrollbar-hide">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="text-label-md font-label-md">Workforce</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="foundation">foundation</span>
+<span class="text-label-md font-label-md">Site Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+<span class="text-label-md font-label-md">Labour Management</span>
+</a>
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary dark:text-inverse-primary font-bold bg-surface-container-high dark:bg-primary-container opacity-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="text-label-md font-label-md">Equipment</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-label-md font-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-md font-label-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+<span class="text-label-md font-label-md">Safety Compliance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full bg-secondary-container text-white font-title-lg text-title-lg py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                    New Project
+                </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] flex-1 min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle dark:border-outline-variant">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group focus-within:ring-2 focus-within:ring-primary rounded-xl transition-all">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl pl-10 pr-4 py-2 text-body-md font-body-md focus:ring-0" placeholder="Search inventory, batches, or equipment..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container text-text-muted">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container text-text-muted">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="flex items-center gap-2 text-body-md font-semibold text-text-muted hover:text-primary">
+                            Support
+                        </button>
+</div>
+<div class="h-8 w-px bg-border-subtle"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-body-md font-semibold">Anil Ambani</p>
+<p class="text-label-sm text-text-muted">Site Manager</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-border-subtle" data-alt="A professional headshot of a mature corporate executive in a crisp white shirt, photographed with soft cinematic lighting in a modern architectural office setting. The aesthetic is clean, sharp, and high-performance, reflecting leadership and industrial reliability. Deep navy and slate tones dominate the background bokeh." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd99fs97n3QCGN_XJ9Af5-idqnIbE9yx-odhXG7jp6lvR98NS_PVdE2a7mxcdxUdhgpmV3nd6T4QA-XSHBbMjs4AeaEgTDFPKc3IfPROWdqjYVrnJknBi2x541HsA_5kKOB8ChvbdykYkPw-IEXYvNMXHY88GwOMuB7nIPTfN3LBnFJHqWqKKPjNhzvSaMYn934kGy-0hDMIYiqTDCsrFi0Q2W45TUOFNX9pEcdJIkJfjBR1boaecamfYO7iHy7p3Me4QnQwuTJQ"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Header & Alerts -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-text-main">Inventory Management</h2>
+<p class="text-body-lg text-text-muted">Centralized monitoring for 14 active construction sites.</p>
+</div>
+<div class="flex gap-3">
+<div class="bg-error-container text-on-error-container px-4 py-2 rounded-xl flex items-center gap-2 border border-error/10">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<span class="text-label-md font-bold">4 Critical Low Stock Alerts</span>
+</div>
+<button class="bg-surface-container-highest text-on-surface border border-outline-variant/30 px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span class="text-label-md font-bold">Export Logs</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Critical Materials (Cement, Steel, etc.) -->
+<div class="col-span-12 lg:col-span-8 bg-white rounded-xl shadow-[0px_4px_6px_rgba(15,23,42,0.05)] border border-border-subtle p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-title-lg font-title-lg">Critical Stock Overview</h3>
+<div class="flex gap-2">
+<span class="bg-surface-container text-text-muted px-2 py-1 rounded text-label-sm">All Batches</span>
+<span class="bg-surface-container text-text-muted px-2 py-1 rounded text-label-sm">In-Transit: 420t</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Cement Card -->
+<div class="p-4 rounded-xl border border-border-subtle bg-surface-container-lowest hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<div>
+<p class="text-label-md font-bold">Cement (OPC 53)</p>
+<p class="text-label-sm text-text-muted">ID: MAT-CEM-001</p>
+</div>
+</div>
+<span class="text-error font-bold text-label-md">Low Stock</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm">
+<span>Current: 1,250 Bags</span>
+<span>Min: 2,000 Bags</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-error w-[62.5%]"></div>
+</div>
+</div>
+</div>
+<!-- Steel Reinforcement -->
+<div class="p-4 rounded-xl border border-border-subtle bg-surface-container-lowest hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-slate-50 text-slate-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">grid_4x4</span>
+</div>
+<div>
+<p class="text-label-md font-bold">Reinforcement Steel</p>
+<p class="text-label-sm text-text-muted">ID: MAT-STL-042</p>
+</div>
+</div>
+<span class="text-status-active font-bold text-label-md">Healthy</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm">
+<span>Current: 85.5 Tons</span>
+<span>Min: 40 Tons</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-status-active w-[85%]"></div>
+</div>
+</div>
+</div>
+<!-- Aggregates -->
+<div class="p-4 rounded-xl border border-border-subtle bg-surface-container-lowest hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-orange-50 text-secondary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">texture</span>
+</div>
+<div>
+<p class="text-label-md font-bold">Aggregates (20mm)</p>
+<p class="text-label-sm text-text-muted">ID: MAT-AGG-088</p>
+</div>
+</div>
+<span class="text-status-on-hold font-bold text-label-md">Reordering</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm">
+<span>Current: 320 Cubic m</span>
+<span>Min: 300 Cubic m</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[70%]"></div>
+</div>
+</div>
+</div>
+<!-- Sand -->
+<div class="p-4 rounded-xl border border-border-subtle bg-surface-container-lowest hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">grain</span>
+</div>
+<div>
+<p class="text-label-md font-bold">River Sand (M-Sand)</p>
+<p class="text-label-sm text-text-muted">ID: MAT-SND-105</p>
+</div>
+</div>
+<span class="text-status-active font-bold text-label-md">Healthy</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm">
+<span>Current: 1,800 Tons</span>
+<span>Min: 1,000 Tons</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-status-active w-[92%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Warehouse Distribution Map Placeholder -->
+<div class="col-span-12 lg:col-span-4 bg-white rounded-xl shadow-[0px_4px_6px_rgba(15,23,42,0.05)] border border-border-subtle p-6 overflow-hidden relative group">
+<div class="relative z-10">
+<h3 class="text-title-lg font-title-lg mb-1">Stock Distribution</h3>
+<p class="text-label-sm text-text-muted mb-4">Godown allocation &amp; geo-tracking</p>
+</div>
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="A clean, minimalist vector-style map of an industrial logistics hub showing three warehouse locations marked with orange dots. The map uses a light-mode grey and white color palette with subtle blueprint-style grid lines. The aesthetic is modern corporate ERP, high-precision and analytical." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGcM_yOvaHH_vMTOV0H9fRAnB0ekhb9ogZq4XHllS3wxmgXa7MyQ7UZfsDFZO2fOiuPP9wdiKdj91k6bJyx8bzXq95ZVpZjRsDf__LZMjm1LyffHEVinhetGbAkEtYuUYTqSygT0DXrOmG6gaxcKYLoq2HyZAcZJhZYYPKDVX2QkqwxTWtajNkBlR9LLabOL9wh64sqwYYx3gkq6bdYgTgLtKrP7rnu3MwTNFPoRIX97QCwYwo-1q04x3ESv_inmLYGj68LZIaPA')"></div>
+</div>
+<div class="absolute bottom-6 left-6 right-6 z-10 flex flex-col gap-2">
+<div class="custom-glass p-3 rounded-lg flex justify-between items-center">
+<span class="text-label-md font-bold">Godown-A (Central)</span>
+<span class="text-label-sm font-semibold">72% Full</span>
+</div>
+<div class="custom-glass p-3 rounded-lg flex justify-between items-center">
+<span class="text-label-md font-bold">Godown-B (North Site)</span>
+<span class="text-label-sm font-semibold">18% Full</span>
+</div>
+</div>
+</div>
+<!-- Material Requisitions Table -->
+<div class="col-span-12 lg:col-span-7 bg-white rounded-xl shadow-[0px_4px_6px_rgba(15,23,42,0.05)] border border-border-subtle flex flex-col">
+<div class="p-6 border-b border-border-subtle flex justify-between items-center">
+<h3 class="text-title-lg font-title-lg">Recent Requisitions</h3>
+<button class="text-primary text-label-md font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-3 text-label-sm text-text-muted font-label-md uppercase tracking-wider">Req ID</th>
+<th class="px-6 py-3 text-label-sm text-text-muted font-label-md uppercase tracking-wider">Material</th>
+<th class="px-6 py-3 text-label-sm text-text-muted font-label-md uppercase tracking-wider">Site</th>
+<th class="px-6 py-3 text-label-sm text-text-muted font-label-md uppercase tracking-wider">Status</th>
+<th class="px-6 py-3 text-label-sm text-text-muted font-label-md uppercase tracking-wider text-right">Qty</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard font-label-md text-label-md">#REQ-8201</td>
+<td class="px-6 py-table-row-standard">
+<p class="text-body-md font-semibold">TMT Bars 12mm</p>
+<p class="text-label-sm text-text-muted">JSW Steel</p>
+</td>
+<td class="px-6 py-table-row-standard text-body-md">Skyline Tower A</td>
+<td class="px-6 py-table-row-standard">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Dispatched</span>
+</td>
+<td class="px-6 py-table-row-standard text-right font-bold text-body-md">15.0 t</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard font-label-md text-label-md">#REQ-8205</td>
+<td class="px-6 py-table-row-standard">
+<p class="text-body-md font-semibold">Cement OPC 53</p>
+<p class="text-label-sm text-text-muted">Ultratech</p>
+</td>
+<td class="px-6 py-table-row-standard text-body-md">Bridge-X Sector 4</td>
+<td class="px-6 py-table-row-standard">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
+</td>
+<td class="px-6 py-table-row-standard text-right font-bold text-body-md">500 Bag</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-table-row-standard font-label-md text-label-md">#REQ-8211</td>
+<td class="px-6 py-table-row-standard">
+<p class="text-body-md font-semibold">Bitumen VG-30</p>
+<p class="text-label-sm text-text-muted">IOCL Bulk</p>
+</td>
+<td class="px-6 py-table-row-standard text-body-md">Highway Ext 2</td>
+<td class="px-6 py-table-row-standard">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Pending</span>
+</td>
+<td class="px-6 py-table-row-standard text-right font-bold text-body-md">2.5 t</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Equipment Tracking -->
+<div class="col-span-12 lg:col-span-5 bg-white rounded-xl shadow-[0px_4px_6px_rgba(15,23,42,0.05)] border border-border-subtle p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-title-lg font-title-lg">Heavy Machinery</h3>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Excavator -->
+<div class="flex items-center gap-4 p-3 border border-border-subtle rounded-xl">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">Crawler Excavator PC210</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-active"></span>
+<span class="text-label-sm text-text-muted">Operational - Site Alpha</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-label-sm font-bold text-status-active">Available</p>
+<p class="text-[10px] text-text-muted uppercase">ID: EQ-2022-01</p>
+</div>
+</div>
+<!-- Concrete Mixer -->
+<div class="flex items-center gap-4 p-3 border border-border-subtle rounded-xl">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">Transit Mixer 7m³</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-on-hold"></span>
+<span class="text-label-sm text-text-muted">In-Transit to Site Gamma</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-label-sm font-bold text-status-on-hold">Occupied</p>
+<p class="text-[10px] text-text-muted uppercase">ID: EQ-2022-44</p>
+</div>
+</div>
+<!-- Tower Crane -->
+<div class="flex items-center gap-4 p-3 border border-border-subtle rounded-xl">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">construction</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">Tower Crane Liebherr</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-label-sm text-text-muted">Maintenance Required</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-label-sm font-bold text-error">Offline</p>
+<p class="text-[10px] text-text-muted uppercase">ID: EQ-2021-09</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-dashed border-border-subtle rounded-xl text-text-muted hover:text-primary hover:border-primary/50 transition-all flex items-center justify-center gap-2 text-label-md font-bold">
+<span class="material-symbols-outlined">add_circle</span>
+                            Register New Equipment
+                        </button>
+</div>
+</div>
+<!-- Footer Quick Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="bg-primary text-white p-6 rounded-xl flex items-center justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="text-label-sm opacity-80 uppercase tracking-widest font-bold">Monthly Spend</p>
+<h4 class="text-headline-md">₹4.2 Cr</h4>
+<p class="text-[10px] mt-1 text-status-active">↑ 12% vs Prev Month</p>
+</div>
+<span class="material-symbols-outlined text-[64px] absolute -right-2 -bottom-2 opacity-10">payments</span>
+</div>
+<div class="bg-white border border-border-subtle p-6 rounded-xl flex items-center justify-between">
+<div>
+<p class="text-label-sm text-text-muted uppercase tracking-widest font-bold">Active Sites</p>
+<h4 class="text-headline-md text-text-main">14</h4>
+<p class="text-[10px] mt-1 text-text-muted">9 Region-Central, 5 North</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+</div>
+<div class="bg-white border border-border-subtle p-6 rounded-xl flex items-center justify-between">
+<div>
+<p class="text-label-sm text-text-muted uppercase tracking-widest font-bold">Total SKUs</p>
+<h4 class="text-headline-md text-text-main">1,402</h4>
+<p class="text-[10px] mt-1 text-error font-bold">24 Flagged for QC</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">inventory</span>
+</div>
+</div>
+<div class="bg-white border border-border-subtle p-6 rounded-xl flex items-center justify-between">
+<div>
+<p class="text-label-sm text-text-muted uppercase tracking-widest font-bold">Asset Value</p>
+<h4 class="text-headline-md text-text-main">₹112.5 Cr</h4>
+<p class="text-[10px] mt-1 text-status-active">Depreciation Adjusted</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button for Inventory -->
+<div class="fixed bottom-8 right-8 z-[60] group">
+<div class="absolute bottom-full right-0 mb-4 flex flex-col gap-3 opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+<button class="bg-white border border-border-subtle shadow-lg px-4 py-2 rounded-full text-label-md font-bold flex items-center gap-2 hover:bg-surface-container whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span> 
+                Inward Entry
+            </button>
+<button class="bg-white border border-border-subtle shadow-lg px-4 py-2 rounded-full text-label-md font-bold flex items-center gap-2 hover:bg-surface-container whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">assignment_return</span>
+                Issue Material
+            </button>
+</div>
+<button class="w-14 h-14 bg-secondary-container text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+</div>
+<script>
+        // Micro-interactions for hover effects and dynamic updates
+        document.querySelectorAll('.hover\\:scale-105').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Subtle scale effect already handled by tailwind, 
+                // but could add custom logic here if needed
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPS Tracking Map Dashboard - CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#45464d",
+                    "on-secondary-fixed": "#341100",
+                    "primary-fixed": "#dae2fd",
+                    "outline-variant": "#c6c6cd",
+                    "inverse-surface": "#2d3133",
+                    "text-muted": "#64748B",
+                    "surface-variant": "#e0e3e5",
+                    "outline": "#76777d",
+                    "on-secondary-container": "#5c2400",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#fcdeb5",
+                    "border-subtle": "#E2E8F0",
+                    "text-main": "#1E293B",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed": "#271901",
+                    "status-completed": "#3B82F6",
+                    "background": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "surface": "#f7f9fb",
+                    "tertiary-container": "#271901",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-tertiary-container": "#98805d",
+                    "on-secondary-fixed-variant": "#783200",
+                    "on-primary-container": "#7c839b",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-dim": "#d8dadc",
+                    "surface-tint": "#565e74",
+                    "secondary": "#9d4300",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "status-active": "#22C55E",
+                    "primary": "#000000",
+                    "inverse-primary": "#bec6e0",
+                    "secondary-container": "#fd761a",
+                    "primary-container": "#131b2e",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-container-high": "#e6e8ea",
+                    "on-surface": "#191c1e",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary": "#ffffff",
+                    "status-on-hold": "#FACC15",
+                    "secondary-fixed": "#ffdbca",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "on-background": "#191c1e",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "table-row-standard": "12px",
+                    "table-row-condensed": "8px",
+                    "margin-desktop": "32px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "container-padding": "24px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed font-body-md overflow-hidden h-screen flex">
+<!-- SideNavBar (Predicted Component Mapping) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] flex flex-col border-r border-border-subtle bg-surface z-50">
+<div class="p-6 flex flex-col gap-1">
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted">Infrastructure Management</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 py-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-high rounded-lg" href="#">
+<span class="material-symbols-outlined">engineering</span> Workforce
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span> Attendance
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">foundation</span> Site Management
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_tree</span> Project Planning
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Inventory
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">construction</span> Equipment
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span> Financials
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">health_and_safety</span> Safety Compliance
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span> Reports
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="p-4 border-t border-border-subtle">
+<button class="w-full bg-secondary-container text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Project
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] flex-1 flex flex-col relative">
+<!-- TopNavBar (Predicted Component Mapping) -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-xl text-body-md focus:ring-2 focus:ring-primary transition-all" placeholder="Search personnel, sites, or hardware ID..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="text-text-muted hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-text-muted hover:text-primary transition-colors"><span class="material-symbols-outlined">help_outline</span></button>
+</div>
+<span class="h-6 w-px bg-border-subtle"></span>
+<button class="text-label-md font-label-md text-text-muted hover:text-primary">Support</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate logistics manager for an infrastructure company, wearing business casual attire, smiling warmly against a blurred office background with blueprints. The lighting is soft and professional, emphasizing a modern corporate aesthetic with high-key whites and clean lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABEHoKx__pW4PN8umrE-LV4lCw7uFfI8IcaFOwSHmaod6UI3mo4c37OOfPFd85Bb5DqBmeugvzm8NXlnJTkRy5BUBGw2MBOQDQ-sfy8-b8TOf-vORIAPGQV2I48kMUy9TGy4MTCHXTScxUKJpdRChCuEAJWuD0GPHCUqPq5lPebmQxFpsTfrMplrjf_iwdJV-0p5I2sllft30RGXD2zl5uWc_-SXKT33g5TkTBJoc1LsWV_yCaFZ26GMfwEcRGDbWEpd5CAYolhA"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Map View Layer -->
+<div class="flex-1 relative bg-[#E2E8F0]">
+<!-- Interactive Map Placeholder -->
+<div class="absolute inset-0 w-full h-full" data-alt="A highly detailed satellite and terrain map visualization of an urban construction zone. The map features modern UI elements like glowing translucent overlays, 3D building wireframes, and vibrant green and orange pulsating markers representing active sites and moving personnel. The style is data-dense and technical, with a premium corporate dark-blue and slate-gray undertone." data-location="Chicago, IL" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')"></div>
+<!-- Floating Map Controls -->
+<div class="absolute top-6 left-6 flex flex-col gap-2">
+<div class="glass-panel p-2 rounded-xl border border-white flex flex-col shadow-lg">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface transition-colors"><span class="material-symbols-outlined">add</span></button>
+<hr class="my-1 border-border-subtle"/>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-on-surface transition-colors"><span class="material-symbols-outlined">remove</span></button>
+</div>
+<button class="glass-panel p-3 rounded-xl border border-white shadow-lg text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">my_location</span></button>
+</div>
+<!-- Active Site Marker Example -->
+<div class="absolute top-[40%] left-[30%] -translate-x-1/2 -translate-y-1/2 group">
+<div class="relative cursor-pointer">
+<div class="absolute inset-0 bg-secondary/30 rounded-full animate-ping"></div>
+<div class="relative bg-secondary text-white p-2 rounded-lg shadow-xl flex items-center gap-2 border-2 border-white">
+<span class="material-symbols-outlined text-[18px]">foundation</span>
+<span class="text-label-sm font-label-sm whitespace-nowrap">Skyline Tower Site</span>
+</div>
+</div>
+</div>
+<!-- Worker Marker Example -->
+<div class="absolute top-[60%] left-[55%] -translate-x-1/2 -translate-y-1/2 group">
+<div class="cursor-pointer">
+<div class="bg-status-active w-4 h-4 rounded-full border-2 border-white shadow-md"></div>
+<div class="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<div class="bg-surface p-3 rounded-xl shadow-2xl border border-border-subtle w-48">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a site engineer wearing a white hard hat and safety vest, looking focused. High-resolution corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGJs4G8USYgJUs8o572yT9g1n9jgfPYWoC6jmviNR2gCTiQZhFXKGKAGyV96bX9UNRwBgUjMlV2qzJbjbSIeGJYDhS8uf06JKAsOeqJnK7UoMXED_PLPzNuM8Tr-tuK8jaRx3rbFYPerfjIoSjR3QLgga_WzZ039SkYx10ye8pE1eIbTfUmFJEVKxQ8ivWfMKdVGG72krQEJZNur-kaF0E6s5H2_mj6llc8yhd_HXdVBdmiZwyi0SB5IkrIzHJjtkal373gmhGhw"/>
+</div>
+<div>
+<p class="text-label-sm font-label-sm leading-tight">Marcus Chen</p>
+<p class="text-[10px] text-status-active font-bold">On-site</p>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] text-text-muted"><span>Department</span><span class="text-on-surface">Structural</span></div>
+<div class="flex justify-between text-[10px] text-text-muted"><span>Heart Rate</span><span class="text-on-surface">78 BPM</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Personnel & Filters -->
+<aside class="w-[400px] border-l border-border-subtle bg-surface-container-lowest flex flex-col z-10 shadow-[-4px_0_12px_rgba(15,23,42,0.02)]">
+<!-- Filter Section -->
+<div class="p-6 border-b border-border-subtle space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="text-title-lg font-title-lg text-on-surface">Tracking Overview</h2>
+<span class="bg-primary/5 text-primary text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="space-y-1.5">
+<label class="text-label-sm font-label-sm text-text-muted">Current Site</label>
+<select class="w-full text-body-md bg-surface-container-low border-none rounded-xl focus:ring-1 focus:ring-primary">
+<option>All Projects</option>
+<option>Skyline Tower</option>
+<option>Metro Extension</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="text-label-sm font-label-sm text-text-muted">Department</label>
+<select class="w-full text-body-md bg-surface-container-low border-none rounded-xl focus:ring-1 focus:ring-primary">
+<option>All Staff</option>
+<option>Engineers</option>
+<option>Labor</option>
+</select>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-surface-container-high hover:bg-surface-dim transition-colors rounded-lg text-label-md font-label-md">Date: Today</button>
+<button class="px-3 bg-surface-container-high hover:bg-surface-dim transition-colors rounded-lg"><span class="material-symbols-outlined text-[20px]">filter_list</span></button>
+</div>
+</div>
+<!-- Stats Summary -->
+<div class="px-6 py-4 flex gap-4 bg-surface-bright border-b border-border-subtle">
+<div class="flex-1 text-center">
+<p class="text-headline-md font-bold text-on-surface">124</p>
+<p class="text-[10px] text-text-muted uppercase tracking-wider">Total Active</p>
+</div>
+<div class="w-px bg-border-subtle"></div>
+<div class="flex-1 text-center">
+<p class="text-headline-md font-bold text-status-active">82</p>
+<p class="text-[10px] text-text-muted uppercase tracking-wider">On-Site</p>
+</div>
+<div class="w-px bg-border-subtle"></div>
+<div class="flex-1 text-center">
+<p class="text-headline-md font-bold text-secondary">42</p>
+<p class="text-[10px] text-text-muted uppercase tracking-wider">In-Transit</p>
+</div>
+</div>
+<!-- Personnel List -->
+<div class="flex-1 overflow-y-auto">
+<div class="p-2 space-y-1">
+<!-- List Item 1 -->
+<div class="p-4 hover:bg-surface-container-low rounded-xl cursor-pointer transition-all border border-transparent hover:border-border-subtle">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Headshot of a senior civil engineer in high-visibility gear, looking ahead with a focused expression. Professional lighting on a construction site background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkij72nyp5aYQvUCJykxAw_rDu1HoVwaohhMpWJsu3Taotam3vFL8dfr0UTvRlNYhr4nUO5eeAp2nw1Vg-hli5tXi__qoOdyqEhk4yDISyHP3cAp28UtZuokTyItyworZVGGFbyT9c-YrDLH-aq_-mpf0QnC1y4TlH73MDf1ghKf8YhR-jTV_LAFjHcI-8U0OKz5EahyW7g0gmYTu8-AtzQo_LV-85gFEO434UVcQDi02ncXkI8QZbKdq8QpRl0KtszM3a8kbuRg"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-status-active border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-body-lg font-bold text-on-surface leading-none">Marcus Chen</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Sr. Structural Engineer</p>
+</div>
+<span class="text-[10px] text-text-muted">Updated 2m ago</span>
+</div>
+<div class="mt-3 flex items-center gap-4">
+<div class="flex items-center gap-1 text-[11px] text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                                            Skyline Tower B
+                                        </div>
+<div class="flex items-center gap-1 text-[11px] text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[14px]">battery_charging_80</span>
+                                            88%
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="p-4 hover:bg-surface-container-low rounded-xl cursor-pointer transition-all border border-transparent hover:border-border-subtle">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Portrait of a female logistics coordinator wearing a professional headset and a company polo shirt. Modern office setting with clean, architectural lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApW6ED81hB2YYrBq4kOs3erqw-F-L4QXiKEUIqi-tBeXnreRxYfNVynUjJRP6ch9AVGAWHZfDwh4jp9BJsoBOQnp3uUuBHYk9e_HzHm38ZzNhnA5xxTeA-whzyZV-odI8fByh8fBeDMIbBfu6eNzRc35A0j0RgM7j0--dQu5a189xjL3bBPpGfvnSNpEBRLZSRkeoBP3Yy9L8G6fw6EgXHlPOufoaITqvJ4xr_RxqWlkyqPayELd0NCM2MK-xtAGiOJe09MKTvaw"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-body-lg font-bold text-on-surface leading-none">Sarah Jenkins</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Logistics Manager</p>
+</div>
+<span class="text-[10px] text-text-muted">In-Transit</span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<div class="flex-1 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[65%] rounded-full"></div>
+</div>
+<span class="text-[10px] text-text-muted whitespace-nowrap">12 mins to Site A</span>
+</div>
+</div>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="p-4 hover:bg-surface-container-low rounded-xl cursor-pointer transition-all border border-transparent hover:border-border-subtle">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-border-subtle grayscale opacity-60">
+<img class="w-full h-full object-cover" data-alt="Headshot of a middle-aged male site supervisor in a casual corporate shirt. Neutral background with soft professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk_lkYZBSjuSrUHDsnP7825TiIDhgO3O4vdXE8tTT2fub-O4HxaFYerK8179E5fcrJ4tr7C3sbGYeVKwckZGbFZrf3PrfaIP0lf90-1nXrmMxkeG8zpRim9OMx9KAmT-vB6HZUdFAAac4phdg5j575loTNtnxF4JNwVosXzPs-UbIfdOei9qFLsa7LmwAb8Xrvbe-o7QgZ8Gy2m5r1YLOnwFv0JQ4LItAQo_crYuRBbNBAtUZeaZGfdEiVRjCCBffJ1RRLVjJQGg"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-text-muted border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-body-lg font-bold text-on-surface leading-none">David Okafor</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Site Supervisor</p>
+</div>
+<span class="text-[10px] text-text-muted">Offline</span>
+</div>
+<p class="text-[11px] text-text-muted mt-2 italic">Last seen: 4h ago at Headquarters</p>
+</div>
+</div>
+</div>
+<!-- List Item 4 -->
+<div class="p-4 hover:bg-surface-container-low rounded-xl cursor-pointer transition-all border border-transparent hover:border-border-subtle bg-primary/5 border-primary/20">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young civil engineer, male, wearing a blue hard hat and smiling slightly. Bright, clear daylight with a blurred construction crane in the far distance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN4QHTKJWQOjFAb2_5mWpprysfj_xaVJlwbKAr_RPhUX2dlBv7u_WplTJfIM2LpK-GZ-AKHrUn723mwSwLiBdjbpMWOCbQZBLKKGjKaSBv9phIGfHYS7V5GOtsUDIrDv0HEbIAGqHy0T1_6Y2aNurH6Xh4mroZG5oK42u-BjBmhdzsYlhBMEXdZLL0OQNOyhPBVowwWMLoylqwB8N067lgQU7cH8L0XsZRSXkQ9-Gqui3xnTjA_zOG3jEefQB_5mC6gs3AJKr9Ew"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-status-active border-2 border-white rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-body-lg font-bold text-on-surface leading-none">Leo Hernandez</h3>
+<p class="text-label-sm font-label-sm text-text-muted mt-1">Field Engineer</p>
+</div>
+<div class="flex items-center gap-1 text-[10px] text-error font-bold animate-pulse">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                            SOS ACTIVE
+                                        </div>
+</div>
+<div class="mt-3">
+<button class="w-full py-1.5 bg-error text-white text-label-sm font-label-sm rounded-lg hover:opacity-90">Open Emergency Protocol</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="p-6 border-t border-border-subtle bg-white">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-primary text-white font-bold rounded-xl hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">share_location</span>
+                        Broadcast Alert to Personnel
+                    </button>
+</div>
+</aside>
+</div>
+</main>
+<script>
+        // Micro-interactions for the dashboard
+        document.querySelectorAll('.personnel-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Focus map on the worker logic would go here
+                console.log('Centering map on personnel...');
+            });
+        });
+
+        // Search highlight interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Site Report | CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        
+        /* Focus styles for the modern corporate look */
+        .input-focus-ring:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7f9fb",
+                        "border-subtle": "#E2E8F0",
+                        "secondary": "#9d4300",
+                        "surface-container-low": "#f2f4f6",
+                        "on-background": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#271901",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#eff1f3",
+                        "status-completed": "#3B82F6",
+                        "on-primary-fixed": "#131b2e",
+                        "error": "#ba1a1a",
+                        "primary-container": "#131b2e",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-secondary-container": "#5c2400",
+                        "inverse-primary": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "surface-variant": "#e0e3e5",
+                        "primary": "#000000",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#341100",
+                        "on-primary-container": "#7c839b",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-secondary-fixed-variant": "#783200",
+                        "text-main": "#1E293B",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "text-muted": "#64748B",
+                        "primary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-container": "#fd761a",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-container": "#271901",
+                        "tertiary": "#000000",
+                        "outline": "#76777d",
+                        "on-surface-variant": "#45464d",
+                        "on-primary": "#ffffff",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "status-active": "#22C55E",
+                        "on-secondary": "#ffffff",
+                        "status-on-hold": "#FACC15",
+                        "on-tertiary-container": "#98805d",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "table-row-standard": "12px",
+                        "table-row-condensed": "8px",
+                        "container-padding": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "title-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<div class="flex min-h-screen">
+<!-- Side Navigation (Immutable from JSON) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-surface border-r border-border-subtle flex flex-col z-50">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white" data-icon="foundation">foundation</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted">Infrastructure Management</p>
+</div>
+</div>
+<nav class="space-y-1">
+<!-- Dashboard maps to Home intent -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<!-- Workforce -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="text-label-md font-label-md">Workforce</span>
+</a>
+<!-- Reports is Active -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-primary font-bold bg-surface-container-high transition-all opacity-90" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="foundation">foundation</span>
+<span class="text-label-md font-label-md">Site Management</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6">
+<button class="w-full bg-secondary-container text-on-secondary py-3 rounded-xl flex items-center justify-center gap-2 font-semibold hover:opacity-90 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Project</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] flex-1 flex flex-col min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-md font-headline-md text-primary">Daily Site Report</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl pl-10 pr-4 py-2 text-body-md input-focus-ring" placeholder="Search reports..." type="text"/>
+</div>
+<button class="p-2 text-text-muted hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-[1px] bg-border-subtle mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-label-md font-bold">Arjun Sharma</p>
+<p class="text-[10px] text-text-muted uppercase tracking-wider">Site Engineer</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-white shadow-sm" data-alt="A professional headshot of a site engineer in high-visibility gear, smiling confidently against a background of a construction site with cranes and scaffolding. The image has a clean, high-contrast corporate aesthetic, using soft natural daylight and a professional color grade that matches the navy and orange UI accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqTpYGtoz61mpGthoJnhOed86_juF_k-GJjlXS8TWQp95SYIsRJs8N0TYxKBc4fq0zoK6cC18RZbsBo9LCM7r_DlEOFeUvyILEg72zQnxxlKv0H5YNdIfFvm0xbFWjinlqqjACqvZ4DGSUwzp2MydXjZU5Asc6P5iysRtMJH0Bw7F0HxYMYGNISYavZTqHl9IB7fq0gd0Fv-kpookdHdkWDHS4bpxJICKwHpG2qsTHPCcZwQi7ggDx9ilYY5QGhzBZQiLwGdv5vQ"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-8 flex gap-gutter max-w-[1600px] mx-auto w-full">
+<!-- Report Form (Main Content) -->
+<div class="flex-1 space-y-8">
+<!-- Progress Tracker / Form Steps -->
+<div class="flex items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-border-subtle">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-label-sm">1</div>
+<span class="text-label-md font-bold">General Info</span>
+</div>
+<div class="h-[2px] flex-1 mx-4 bg-surface-container-high"></div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-text-muted flex items-center justify-center text-label-sm">2</div>
+<span class="text-label-md text-text-muted">Resources</span>
+</div>
+<div class="h-[2px] flex-1 mx-4 bg-surface-container-high"></div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-text-muted flex items-center justify-center text-label-sm">3</div>
+<span class="text-label-md text-text-muted">Review</span>
+</div>
+</div>
+<!-- Form Section 1: Site Details -->
+<section class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle">
+<h3 class="text-title-lg font-title-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+                            Primary Information
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-2">
+<label class="text-label-sm text-text-muted uppercase tracking-wide">Site Name</label>
+<select class="w-full bg-surface border border-border-subtle rounded-xl px-4 py-3 text-body-md input-focus-ring">
+<option>Skyline Residency - Sector 45</option>
+<option>Metro Link Bridge - Phase 2</option>
+<option>Industrial Hub - Block C</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm text-text-muted uppercase tracking-wide">Date of Report</label>
+<input class="w-full bg-surface border border-border-subtle rounded-xl px-4 py-3 text-body-md input-focus-ring" type="date" value="2023-11-24"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm text-text-muted uppercase tracking-wide">Weather Condition</label>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 border border-border-subtle rounded-lg bg-surface-container-high text-primary flex flex-col items-center gap-1 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="sunny">sunny</span>
+<span class="text-[10px] font-bold">Sunny</span>
+</button>
+<button class="flex-1 py-2 px-3 border border-border-subtle rounded-lg hover:bg-surface-container transition-all flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[18px]" data-icon="cloud">cloud</span>
+<span class="text-[10px]">Cloudy</span>
+</button>
+<button class="flex-1 py-2 px-3 border border-border-subtle rounded-lg hover:bg-surface-container transition-all flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[18px]" data-icon="rainy">rainy</span>
+<span class="text-[10px]">Rainy</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Work Completed -->
+<section class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle">
+<h3 class="text-title-lg font-title-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt">task_alt</span>
+                            Work Completed Today
+                        </h3>
+<div class="space-y-2">
+<div class="flex items-center gap-2 mb-2 p-1 bg-surface rounded-lg">
+<button class="p-1.5 hover:bg-white rounded transition-all"><span class="material-symbols-outlined text-[18px]" data-icon="format_bold">format_bold</span></button>
+<button class="p-1.5 hover:bg-white rounded transition-all"><span class="material-symbols-outlined text-[18px]" data-icon="format_italic">format_italic</span></button>
+<button class="p-1.5 hover:bg-white rounded transition-all"><span class="material-symbols-outlined text-[18px]" data-icon="format_list_bulleted">format_list_bulleted</span></button>
+<div class="h-4 w-[1px] bg-border-subtle mx-1"></div>
+<button class="p-1.5 hover:bg-white rounded transition-all"><span class="material-symbols-outlined text-[18px]" data-icon="link">link</span></button>
+</div>
+<textarea class="w-full bg-surface border border-border-subtle rounded-xl px-4 py-3 text-body-md input-focus-ring resize-none" placeholder="Describe the milestones achieved today..." rows="6"></textarea>
+</div>
+</section>
+<!-- Resource Usage -->
+<section class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle">
+<h3 class="text-title-lg font-title-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="engineering">engineering</span>
+                            Resource Usage
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Labour Count (Auto-filled) -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<label class="text-label-sm text-text-muted uppercase tracking-wide">Labour Distribution</label>
+<span class="text-[10px] bg-status-active/10 text-status-active px-2 py-0.5 rounded-full font-bold">Live Sync</span>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center p-3 bg-surface rounded-xl">
+<span class="text-body-md">Skilled Workers</span>
+<span class="font-bold">24</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-surface rounded-xl">
+<span class="text-body-md">General Labour</span>
+<span class="font-bold">48</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-surface rounded-xl">
+<span class="text-body-md">Specialized Techs</span>
+<span class="font-bold">06</span>
+</div>
+</div>
+</div>
+<!-- Materials Input -->
+<div class="space-y-4">
+<label class="text-label-sm text-text-muted uppercase tracking-wide">Material Consumption</label>
+<div class="space-y-3">
+<div class="flex gap-2">
+<input class="flex-[2] bg-surface border border-border-subtle rounded-xl px-4 py-2 text-body-md input-focus-ring" placeholder="Material Name" type="text" value="Cement (Grade 43)"/>
+<input class="flex-1 bg-surface border border-border-subtle rounded-xl px-4 py-2 text-body-md input-focus-ring" placeholder="Qty" type="text" value="120 Bags"/>
+</div>
+<div class="flex gap-2">
+<input class="flex-[2] bg-surface border border-border-subtle rounded-xl px-4 py-2 text-body-md input-focus-ring" placeholder="Material Name" type="text" value="Steel Rods (12mm)"/>
+<input class="flex-1 bg-surface border border-border-subtle rounded-xl px-4 py-2 text-body-md input-focus-ring" placeholder="Qty" type="text" value="2.5 Tons"/>
+</div>
+<button class="text-primary text-label-sm font-bold flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_circle">add_circle</span>
+                                        Add Material
+                                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Issues / Blockers -->
+<section class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle">
+<h3 class="text-title-lg font-title-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+                            Issues &amp; Blockers
+                        </h3>
+<textarea class="w-full bg-surface border border-border-subtle rounded-xl px-4 py-3 text-body-md input-focus-ring resize-none" placeholder="Log any delays, equipment failures, or safety incidents..." rows="3"></textarea>
+</section>
+<!-- Media Upload -->
+<section class="bg-white p-6 rounded-xl shadow-sm border border-border-subtle">
+<h3 class="text-title-lg font-title-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="photo_camera">photo_camera</span>
+                            Site Progress Photos
+                        </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="aspect-square border-2 border-dashed border-border-subtle rounded-xl flex flex-col items-center justify-center text-text-muted hover:border-primary hover:text-primary transition-all cursor-pointer bg-surface">
+<span class="material-symbols-outlined text-[32px]" data-icon="add_a_photo">add_a_photo</span>
+<span class="text-label-sm mt-2">Upload Photo</span>
+</div>
+<div class="relative group aspect-square rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A high-quality wide shot of a construction foundation being poured with concrete. The lighting is bright mid-day sun, casting sharp shadows and highlighting the texture of the grey wet cement and the orange safety vests of workers in the background. The aesthetic is clean and industrial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZdmXiEhNBXede6hpiYTD1OGeJt65gnJw0XtYI2AeHOJYNVDHf4vKUysMDTUffXFf-jvqf98YX2oRLRFSVF5ZGZX03EysLYxkh1hmH8SMNTjPlsO86miR5EswIT250-ueU5cBdFzAegZpHXpLPDjB9gn8WgyWglLAseet3UUG9t-S1c9NfY2p_5L_ViVLe7poMnoytSeoOU8b65wRrnRRin74ZrbfIkHoPH02cX9BNErV2QYeDws_8Vh8G71V5-KLfEWGTHA_x8Q"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="text-white"><span class="material-symbols-outlined" data-icon="delete">delete</span></button>
+</div>
+</div>
+<div class="relative group aspect-square rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close up of steel reinforcement bars tied together on a construction site. The focus is sharp on the metallic texture and the wire ties, with a soft blurred background of the rest of the site. Sunlight glints off the metal surfaces, creating a professional engineering feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-UeGXgZ06M-e4cq3QE_oN0HeOPakG_UDkSA52q-zhYgAh_4INbOpHCDDG8gfcmEWxD3yPfwV4ZNreq3UE-niHczGW7VRvOx4BfAuGna87EkhVqmbcleHrrJRI_KjWCtA2Kx4AYEkSkKqYw0DS3k1oUIwPihV59U8j82RGVcZJmz0-EZpPqxURmLkEpJTWzFQpzaZfAFQMWSzHgFKjC2gNhoNkrKcYJk4dBkbRaIwN22Ho7Jfq5lpEaeaB2PSxxsyniL2j9SDA-w"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="text-white"><span class="material-symbols-outlined" data-icon="delete">delete</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Actions -->
+<div class="flex items-center justify-between pt-4 pb-12">
+<button class="px-8 py-3 rounded-xl border border-border-subtle font-bold text-text-main hover:bg-white hover:shadow-sm transition-all">
+                            Save as Draft
+                        </button>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-xl bg-surface-container text-text-muted font-bold transition-all">
+                                Previous Step
+                            </button>
+<button class="px-10 py-3 rounded-xl bg-secondary-container text-on-secondary font-bold shadow-lg shadow-secondary-container/20 hover:opacity-90 transition-all flex items-center gap-2">
+                                Submit Report
+                                <span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recent Reports Sidebar -->
+<aside class="w-[360px] hidden xl:block space-y-6">
+<div class="bg-white rounded-xl shadow-sm border border-border-subtle p-6 sticky top-24">
+<h4 class="text-title-lg font-title-lg mb-6 flex items-center justify-between">
+                            Recent Reports
+                            <span class="text-label-sm text-primary cursor-pointer hover:underline">View All</span>
+</h4>
+<div class="space-y-4">
+<!-- Report Item 1 -->
+<div class="p-4 rounded-xl border border-border-subtle hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-sm font-bold text-primary">Nov 23, 2023</span>
+<span class="text-[10px] bg-status-active/10 text-status-active px-2 py-0.5 rounded-full font-bold">Approved</span>
+</div>
+<p class="text-body-md font-semibold text-text-main group-hover:text-primary transition-colors">Skyline Residency - Sec 45</p>
+<p class="text-label-sm text-text-muted mt-1 truncate">Poured Level 3 floor slab B...</p>
+<div class="mt-3 flex items-center gap-4 text-text-muted">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="groups">groups</span>
+<span class="text-[10px]">72</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="image">image</span>
+<span class="text-[10px]">4</span>
+</div>
+</div>
+</div>
+<!-- Report Item 2 -->
+<div class="p-4 rounded-xl border border-border-subtle hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-sm font-bold text-primary">Nov 22, 2023</span>
+<span class="text-[10px] bg-status-active/10 text-status-active px-2 py-0.5 rounded-full font-bold">Approved</span>
+</div>
+<p class="text-body-md font-semibold text-text-main group-hover:text-primary transition-colors">Skyline Residency - Sec 45</p>
+<p class="text-label-sm text-text-muted mt-1 truncate">Completed HVAC ducting work...</p>
+<div class="mt-3 flex items-center gap-4 text-text-muted">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="groups">groups</span>
+<span class="text-[10px]">68</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="image">image</span>
+<span class="text-[10px]">6</span>
+</div>
+</div>
+</div>
+<!-- Report Item 3 -->
+<div class="p-4 rounded-xl border border-border-subtle hover:border-primary/30 transition-all cursor-pointer group bg-surface-container-low">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-sm font-bold text-primary">Nov 21, 2023</span>
+<span class="text-[10px] bg-status-on-hold/10 text-status-on-hold px-2 py-0.5 rounded-full font-bold">Draft</span>
+</div>
+<p class="text-body-md font-semibold text-text-main">Metro Link Bridge - Ph 2</p>
+<p class="text-label-sm text-text-muted mt-1 truncate">Awaiting material test results...</p>
+<div class="mt-3 flex items-center gap-4 text-text-muted">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="groups">groups</span>
+<span class="text-[10px]">12</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="image">image</span>
+<span class="text-[10px]">2</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Statistics Card -->
+<div class="mt-8 p-4 bg-primary text-white rounded-xl relative overflow-hidden">
+
+<div class="relative z-10">
+<p class="text-label-sm opacity-80 mb-1">Monthly Completion</p>
+<p class="text-headline-md font-bold mb-4">94.2%</p>
+<div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[94.2%]"></div>
+</div>
+<p class="text-[10px] mt-2 opacity-60">22 reports submitted out of 24 days</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+<!-- Floating Action Button - Only for Dashboard context (though this is a specific form, adding it for global consistency) -->
+<!-- Suppressed based on "Task-Focused" rule in System Prompt: suppression on Details/Transactional screens -->
+<script>
+        // Simple interactivity for weather buttons
+        document.querySelectorAll('button[class*="flex-col"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active state from all
+                this.parentNode.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('bg-surface-container-high', 'text-primary');
+                    b.classList.add('text-text-muted');
+                });
+                // Add active state to clicked
+                this.classList.add('bg-surface-container-high', 'text-primary');
+                this.classList.remove('text-text-muted');
+            });
+        });
+
+        // Form submission animation mock
+        const submitBtn = document.querySelector('button:contains("Submit Report")');
+        if(submitBtn) {
+            submitBtn.addEventListener('click', () => {
+                submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Submitting...';
+                setTimeout(() => {
+                    alert('Daily Site Report submitted successfully!');
+                    window.location.reload();
+                }, 1500);
+            });
+        }
+
+        // Custom selector polyfill for "contains" as standard querySelector doesn't support it
+        function getByText(text) {
+          const buttons = document.querySelectorAll('button');
+          return Array.from(buttons).find(button => button.textContent.includes(text));
+        }
+
+        const realSubmit = getByText('Submit Report');
+        if(realSubmit) {
+            realSubmit.addEventListener('click', () => {
+                realSubmit.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Submitting...';
+                setTimeout(() => {
+                    alert('Daily Site Report submitted successfully!');
+                    location.reload();
+                }, 1500);
+            });
+        }
+    </script>
+</body></html>

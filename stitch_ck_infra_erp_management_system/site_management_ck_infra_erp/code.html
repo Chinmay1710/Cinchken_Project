@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Site Management | CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .site-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .site-card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -10px rgba(15, 23, 42, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#98805d",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "on-error": "#ffffff",
+                      "on-surface": "#191c1e",
+                      "error-container": "#ffdad6",
+                      "on-secondary": "#ffffff",
+                      "surface-dim": "#d8dadc",
+                      "text-muted": "#64748B",
+                      "status-completed": "#3B82F6",
+                      "primary-container": "#131b2e",
+                      "inverse-surface": "#2d3133",
+                      "surface-container-high": "#e6e8ea",
+                      "on-secondary-container": "#5c2400",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f7f9fb",
+                      "on-surface-variant": "#45464d",
+                      "inverse-primary": "#bec6e0",
+                      "surface": "#f7f9fb",
+                      "outline": "#76777d",
+                      "text-main": "#1E293B",
+                      "on-secondary-fixed": "#341100",
+                      "border-subtle": "#E2E8F0",
+                      "primary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "secondary": "#9d4300",
+                      "on-primary-container": "#7c839b",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "status-active": "#22C55E",
+                      "on-background": "#191c1e",
+                      "surface-variant": "#e0e3e5",
+                      "status-on-hold": "#FACC15",
+                      "on-secondary-fixed-variant": "#783200",
+                      "surface-tint": "#565e74",
+                      "surface-container": "#eceef0",
+                      "on-primary-fixed": "#131b2e",
+                      "primary-fixed": "#dae2fd",
+                      "tertiary-fixed": "#fcdeb5",
+                      "outline-variant": "#c6c6cd",
+                      "secondary-fixed-dim": "#ffb690",
+                      "on-tertiary-fixed": "#271901",
+                      "secondary-container": "#fd761a",
+                      "surface-bright": "#f7f9fb",
+                      "secondary-fixed": "#ffdbca",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#000000",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#271901",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "container-padding": "24px",
+                      "table-row-standard": "12px",
+                      "table-row-condensed": "8px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden flex">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-surface flex flex-col border-r border-border-subtle z-50">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted mt-1">Infrastructure Management</p>
+</div>
+<nav class="flex-1 px-4 overflow-y-auto space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="text-label-md font-label-md">Workforce</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-label-md font-label-md">Attendance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary font-bold bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="foundation">foundation</span>
+<span class="text-label-md font-label-md">Site Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+<span class="text-label-md font-label-md">Labour Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="text-label-md font-label-md">Project Planning</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="text-label-md font-label-md">Equipment</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="text-label-md font-label-md">Procurement</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-label-md font-label-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+<span class="text-label-md font-label-md">Safety Compliance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full bg-secondary text-on-primary py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>New Project</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[280px] h-screen overflow-y-auto flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md focus-within:ring-2 focus-within:ring-primary transition-all rounded-lg overflow-hidden border border-border-subtle">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" data-icon="search">search</span>
+<input class="w-full bg-surface-container-lowest border-none pl-10 pr-4 py-2 text-body-md focus:ring-0" placeholder="Search sites, engineers, or locations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-text-muted hover:text-primary transition-all p-2 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<button class="text-text-muted hover:text-primary transition-all p-2">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-border-subtle mx-2"></div>
+<button class="flex items-center gap-3 pl-2 pr-1 py-1 rounded-full hover:bg-surface-container-low transition-all">
+<div class="flex flex-col items-end text-right">
+<span class="text-label-md font-bold text-on-surface">Rajesh Kumar</span>
+<span class="text-xs text-text-muted">Operations Head</span>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface-container-high bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior operation manager in his late 40s, wearing a premium navy blue polo shirt. The background is a blurred modern office space with clean architectural lines. The lighting is soft and flattering, emphasizing a corporate and reliable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Z23yDb92fdDcaL9w7SkJ7cJyMEtVr_BrCVXwA9GCXPDEJKpbHvrtJmi0PLlUIsiRzp9L6Ts5p9SHNC0nbbcRCTU7GXqK6gJao-IaA2p1bIBdOgtnUY88nHFMt85ah4tB2QlORuUV5VJPszXAXJdWpk8A6-jz4eenI1Ybg8AxpQUSU16Uw0B2z-tpIxultVJf1pjraSGE-2KtdIPtpjw47kKUjVjmr73VIUnz_lW9_WwpzZtlbReKyvEriZ6Vgp70f4Ci3auyvA"/>
+</div>
+</button>
+</div>
+</header>
+<div class="p-container-padding space-y-margin-desktop">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Site Management</h2>
+<p class="text-body-md text-text-muted">Overseeing 12 active infrastructure projects across the region.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-white border border-border-subtle px-4 py-2.5 rounded-xl text-label-md font-semibold flex items-center gap-2 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                        Filter Sites
+                    </button>
+<button class="bg-secondary text-on-primary px-5 py-2.5 rounded-xl text-label-md font-semibold flex items-center gap-2 hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined" data-icon="add_location_alt">add_location_alt</span>
+                        Add Site
+                    </button>
+</div>
+</div>
+<!-- Site Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl p-5 border border-border-subtle site-card-hover cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-status-active"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="bridge">badge</span>
+</div>
+<div>
+<h3 class="text-title-lg font-title-lg">Vikas Setu Bridge</h3>
+<p class="text-xs text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+                                    Lucknow, UP
+                                </p>
+</div>
+</div>
+<span class="px-2.5 py-1 bg-green-100 text-green-700 text-label-sm rounded-full">ACTIVE</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-label-md text-text-muted">Project Progress</span>
+<span class="text-label-md font-bold text-secondary">68%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 68%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div class="flex flex-col">
+<span class="text-xs text-text-muted uppercase tracking-wider font-semibold">Engineer</span>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male civil engineer wearing a white hard hat and high-visibility vest. Professional corporate style, daylight setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHsbW-jxwqbTSkVYJWnFEPrhYLYL62wKiGczZEDwgcNmgMohFZjmtEmz1nHdpvOb0fupO3nM9zveQLngrxeneLe7QxSKL1tvMjP6iHtG72K4s2isMOX8iiqSjyNgKsXrv4fjtcmLzPKNtBtvw2n-8zqWDEQSAy5jgHGyekWTCrvxy5NcRnReCwG3LHzwCVxS3gMO8rcU5nPhNF1gx-8RYfyaR8Zt6Ofhj6eMSk0h8xWqnbnS2kSGaFavuA1ewB4xc_Vy4-z45qAQ"/>
+</div>
+<span class="text-label-md">Amit Varma</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-text-muted uppercase tracking-wider font-semibold">Team Size</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="group">group</span>
+<span class="text-label-md">142 Personnel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl p-5 border border-border-subtle site-card-hover cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-status-active"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined" data-icon="apartment">apartment</span>
+</div>
+<div>
+<h3 class="text-title-lg font-title-lg">Awas-Nagar Phase II</h3>
+<p class="text-xs text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+                                    Pune, MH
+                                </p>
+</div>
+</div>
+<span class="px-2.5 py-1 bg-green-100 text-green-700 text-label-sm rounded-full">ACTIVE</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-label-md text-text-muted">Project Progress</span>
+<span class="text-label-md font-bold text-secondary">34%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 34%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div class="flex flex-col">
+<span class="text-xs text-text-muted uppercase tracking-wider font-semibold">Engineer</span>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a female project manager with a yellow hard hat and corporate professional attire. Sharp focus, professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz6HldofdS5shivbwdQH31qV44H6IRfI_Jot-BLkplDgdwAYMViAZInAGZ_s0L_1OJImVHJVQsvAdez7TQM3BW88IN4upIvhdsatcTxfMxG-RpjD6jIXMsjbPKJ6-UoQF3tY9IVMjefTfdjCCcqS6jom-CBj3eYu93TeJcnyGnQzqlYcX4w4dnWcITVJHe399UpkOIRoluLtY_axXzz-YLzw-ZWeMjZo1F3NZ8HG9cwlsHscKuV8Imq1cWR_6RZ0yVMLd80o5Q9w"/>
+</div>
+<span class="text-label-md">Priya Singh</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-text-muted uppercase tracking-wider font-semibold">Team Size</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="group">group</span>
+<span class="text-label-md">88 Personnel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-xl p-5 border border-border-subtle site-card-hover cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-status-on-hold"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined" data-icon="tunnel">tune</span>
+</div>
+<div>
+<h3 class="text-title-lg font-title-lg">Zojila Tunnel North</h3>
+<p class="text-xs text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+                                    Sonamarg, JK
+                                </p>
+</div>
+</div>
+<span class="px-2.5 py-1 bg-amber-100 text-amber-700 text-label-sm rounded-full uppercase">On Hold</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-1.5">
+<span class="text-label-md text-text-muted">Project Progress</span>
+<span class="text-label-md font-bold text-secondary">12%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 12%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div class="flex flex-col">
+<span class="text-xs text-text-muted uppercase tracking-wider font-semibold">Engineer</span>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a seasoned civil engineer with grey hair and a reflective safety jacket. High altitude snowy background, cinematic soft light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq3F82_xp19FYuOJ4_mRACE0g-2dEwXgmrD0Rc3r-CRs5BX16W4Wjo-fA1ijAOJb7-ooP3STF1NVbZ94tS2Bh5MwC_b6JPhYkCXpgVT7DpHDgzOLKdCtSoo0vm1LYe0vFAe2grneOc-HTBjt8W7Vqdoh3YKCVsUL776vmTeO_pWedoX7HifnvuJuUTsrUJiZo_Y9l_BaJhbkb4z9VULI1eJZGM_9Lk5rGMhtnkDukiIYk5vXR62kLWtYki9EkCDigRY7JmiQTZjg"/>
+</div>
+<span class="text-label-md">S. Deshmukh</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-text-muted uppercase tracking-wider font-semibold">Team Size</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="group">group</span>
+<span class="text-label-md">210 Personnel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- List View Section -->
+<div class="bg-white rounded-xl border border-border-subtle overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-low/50">
+<h3 class="text-title-lg font-title-lg">Recent Site Allocations</h3>
+<div class="flex gap-2">
+<button class="p-1.5 text-text-muted hover:text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle">
+<th class="px-6 py-4 text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Site Name</th>
+<th class="px-6 py-4 text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Start Date</th>
+<th class="px-6 py-4 text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Expected End</th>
+<th class="px-6 py-4 text-label-sm font-label-sm text-text-muted uppercase tracking-wider">Current Status</th>
+<th class="px-6 py-4 text-label-sm font-label-sm text-text-muted uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-low transition-colors duration-200">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">NH-44 Highway Extension</span>
+<span class="text-xs text-text-muted">Section 4A - Bangalore Sector</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">Oct 12, 2023</td>
+<td class="px-6 py-4 text-body-md">Dec 20, 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-active"></span>
+<span class="text-label-md">On Track</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-label-md font-semibold">View Logs</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors duration-200">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Indira Metro Terminal</span>
+<span class="text-xs text-text-muted">Terminal 3 Connection Wing</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">Jan 05, 2024</td>
+<td class="px-6 py-4 text-body-md">May 15, 2025</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-active"></span>
+<span class="text-label-md">On Track</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-label-md font-semibold">View Logs</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors duration-200">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Ganga Expressway P6</span>
+<span class="text-xs text-text-muted">Concrete Casting Section</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">Aug 20, 2023</td>
+<td class="px-6 py-4 text-body-md">Nov 30, 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-label-md text-error font-medium">Delayed</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-label-md font-semibold">View Logs</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors duration-200">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Kochi Port Terminal</span>
+<span class="text-xs text-text-muted">Storage Bay 11-14</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">Mar 01, 2024</td>
+<td class="px-6 py-4 text-body-md">Oct 10, 2025</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-on-hold"></span>
+<span class="text-label-md">Initial Prep</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline text-label-md font-semibold">View Logs</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-border-subtle flex justify-between items-center bg-surface-container-lowest">
+<span class="text-label-md text-text-muted">Showing 4 of 12 active sites</span>
+<div class="flex gap-2">
+<button class="p-1 border border-border-subtle rounded-md hover:bg-surface-container-low disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-1 border border-border-subtle rounded-md hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for search bar
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchIcon = document.querySelector('header .material-symbols-outlined');
+        
+        searchInput.addEventListener('focus', () => {
+            searchIcon.classList.add('text-primary');
+        });
+        
+        searchInput.addEventListener('blur', () => {
+            searchIcon.classList.remove('text-primary');
+        });
+
+        // Hover animation logic for cards - subtle 3D tilt can be added here if needed
+        const cards = document.querySelectorAll('.site-card-hover');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for more advanced animations
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Planning | CK Infra ERP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fd761a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#783200",
+                    "primary-fixed-dim": "#bec6e0",
+                    "background": "#f7f9fb",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed": "#fcdeb5",
+                    "inverse-primary": "#bec6e0",
+                    "on-tertiary-fixed": "#271901",
+                    "border-subtle": "#E2E8F0",
+                    "inverse-surface": "#2d3133",
+                    "outline": "#76777d",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#000000",
+                    "status-on-hold": "#FACC15",
+                    "secondary": "#9d4300",
+                    "secondary-fixed-dim": "#ffb690",
+                    "secondary-fixed": "#ffdbca",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "status-active": "#22C55E",
+                    "text-muted": "#64748B",
+                    "on-secondary-container": "#5c2400",
+                    "on-primary-container": "#7c839b",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary": "#000000",
+                    "surface-container-low": "#f2f4f6",
+                    "surface": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "on-surface-variant": "#45464d",
+                    "surface-container-high": "#e6e8ea",
+                    "on-tertiary-container": "#98805d",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "tertiary-fixed-dim": "#dec29a",
+                    "surface-tint": "#565e74",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "on-secondary-fixed": "#341100",
+                    "status-completed": "#3B82F6",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c6c6cd",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#131b2e",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#271901",
+                    "text-main": "#1E293B",
+                    "primary-fixed": "#dae2fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "table-row-condensed": "8px",
+                    "unit": "4px",
+                    "table-row-standard": "12px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "32px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+          }
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
+        
+        .gantt-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] flex flex-col border-r border-border-subtle bg-surface z-50">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">CK Infra ERP</h1>
+<p class="text-label-md font-label-md text-text-muted mt-1">Infrastructure Management</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1">
+<!-- Navigation items mapping from JSON -->
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">groups</span> Workforce
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span> Attendance
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">foundation</span> Site Management
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">engineering</span> Labour Management
+            </a>
+<!-- ACTIVE: Project Planning -->
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-primary font-bold bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_tree</span> Project Planning
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Inventory
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">construction</span> Equipment
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">shopping_cart</span> Procurement
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span> Financials
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">health_and_safety</span> Safety Compliance
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span> Reports
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-label-md font-label-md text-text-muted hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="p-4 border-t border-border-subtle">
+<button class="w-full bg-secondary-container text-on-tertiary px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add_circle</span> New Project
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-full px-container-padding h-16 sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-xl focus:ring-2 focus:ring-primary outline-none text-body-md transition-all" placeholder="Search projects, sites, or tasks..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 text-text-muted">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<span class="h-4 w-[1px] bg-border-subtle"></span>
+<span class="text-body-md font-medium cursor-pointer hover:text-primary">Support</span>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-border-subtle">
+<div class="text-right">
+<p class="text-label-md font-bold text-on-surface">Alex Thompson</p>
+<p class="text-[10px] text-text-muted uppercase tracking-wider">Sr. Project Manager</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="A professional headshot of a senior project manager in a clean corporate office setting with soft natural lighting, reflecting high-end enterprise software aesthetics. The image uses a neutral color palette of soft whites and cool greys to match a premium modern ERP interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsDZG0s_Tyqv7pndVUMZFGEdfpCyNHwoRKy9TE7pGHNeGu96OMzl2vDnEASzyozufj74xql_jmQStQCfhM78k_58WOGnizlQRU_xBZE8Dg9LmUMlYhhWub1f_TK-wSm0N4grHM5Xs5am6VIvGDbv75wmQMjAFExSXhydmCZar2TIG6-MkEf3eF515_AJaSdGTNJ-a7agm7BkfgL1fRVhN36u1L1uKKJK99jIDPZ8SYjxMJtUtCV3iDx1S3RTu3NQ_C9BzJgLssZg"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-8 space-y-8 max-w-[1600px] mx-auto w-full">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Project Planning Dashboard</h2>
+<p class="text-body-md text-text-muted">Q3 Infrastructure Expansion - Northeast Corridor</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-border-subtle bg-white text-on-surface rounded-xl font-semibold hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">filter_list</span> Filters
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-border-subtle bg-white text-on-surface rounded-xl font-semibold hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">download</span> Export Plan
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Section -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Timeline/Gantt View - Main Feature -->
+<div class="col-span-12 lg:col-span-8 bg-white rounded-xl border border-border-subtle shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border-subtle flex justify-between items-center bg-surface-bright">
+<h3 class="text-title-lg font-title-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container">view_timeline</span>
+                            Project Milestones Timeline
+                        </h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-primary text-white rounded-lg text-label-md">Month</button>
+<button class="px-3 py-1 text-text-muted hover:bg-surface-container-low rounded-lg text-label-md">Quarter</button>
+<button class="px-3 py-1 text-text-muted hover:bg-surface-container-low rounded-lg text-label-md">Year</button>
+</div>
+</div>
+<div class="p-6 overflow-x-auto">
+<div class="min-w-[800px] gantt-grid space-y-4">
+<!-- Gantt Timeline Header -->
+<div class="flex h-10 border-b border-border-subtle items-end pb-2">
+<div class="w-48 shrink-0 text-label-md font-bold text-text-muted">Phases</div>
+<div class="flex-1 flex justify-between text-[10px] uppercase font-bold text-text-muted tracking-widest">
+<span class="w-10 text-center">Jul</span><span class="w-10 text-center">Aug</span><span class="w-10 text-center">Sep</span><span class="w-10 text-center">Oct</span><span class="w-10 text-center">Nov</span><span class="w-10 text-center">Dec</span>
+</div>
+</div>
+<!-- Timeline Rows -->
+<div class="space-y-6 pt-4">
+<!-- Row 1 -->
+<div class="flex items-center">
+<div class="w-48 shrink-0 text-body-md font-medium">Site Clearance</div>
+<div class="flex-1 relative h-6 bg-surface-container-low rounded-full">
+<div class="absolute left-0 w-[20%] h-full bg-status-completed rounded-full flex items-center px-3">
+<span class="text-[10px] text-white font-bold">100%</span>
+</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center">
+<div class="w-48 shrink-0 text-body-md font-medium">Foundation Works</div>
+<div class="flex-1 relative h-6 bg-surface-container-low rounded-full">
+<div class="absolute left-[15%] w-[35%] h-full bg-status-active rounded-full flex items-center px-3">
+<span class="text-[10px] text-white font-bold">65%</span>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center">
+<div class="w-48 shrink-0 text-body-md font-medium">Structural Steel</div>
+<div class="flex-1 relative h-6 bg-surface-container-low rounded-full">
+<div class="absolute left-[45%] w-[40%] h-full bg-secondary-container rounded-full flex items-center px-3">
+<span class="text-[10px] text-white font-bold whitespace-nowrap">Plan</span>
+</div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="flex items-center">
+<div class="w-48 shrink-0 text-body-md font-medium">Utility Routing</div>
+<div class="flex-1 relative h-6 bg-surface-container-low rounded-full">
+<div class="absolute left-[40%] w-[15%] h-full bg-status-on-hold rounded-full flex items-center px-3">
+<span class="text-[10px] text-on-surface font-bold">On-Hold</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Budget vs Actual Tracking -->
+<div class="col-span-12 lg:col-span-4 bg-white rounded-xl border border-border-subtle shadow-sm p-6 flex flex-col justify-between">
+<div>
+<h3 class="text-title-lg font-title-lg flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-status-active">payments</span>
+                            Budget Tracking
+                        </h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-label-md text-text-muted">TOTAL BUDGET SPEND</span>
+<span class="text-headline-md font-bold">$12.4M / $25M</span>
+</div>
+<div class="w-full h-3 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 49.6%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-label-sm text-text-muted uppercase">Materials</p>
+<p class="text-title-lg font-bold text-on-surface">$5.8M</p>
+<p class="text-[10px] text-status-active flex items-center gap-1 font-bold mt-1">
+<span class="material-symbols-outlined text-xs">trending_down</span> -4% Under
+                                    </p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-label-sm text-text-muted uppercase">Labor</p>
+<p class="text-title-lg font-bold text-on-surface">$4.2M</p>
+<p class="text-[10px] text-error flex items-center gap-1 font-bold mt-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12% Over
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-6 border-t border-border-subtle">
+<button class="w-full py-2 text-primary font-bold text-body-md hover:underline flex items-center justify-center gap-2">
+                            View Financial Breakdown <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Resource Allocation Summary -->
+<div class="col-span-12 lg:col-span-5 bg-white rounded-xl border border-border-subtle shadow-sm p-6">
+<h3 class="text-title-lg font-title-lg flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">engineering</span>
+                        Resource Allocation
+                    </h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-body-md font-bold">Manpower Utilization</span>
+<span class="text-label-md font-bold">84%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low rounded-full">
+<div class="h-full bg-status-active rounded-full" style="width: 84%"></div>
+</div>
+<p class="text-[10px] text-text-muted mt-1 font-medium">1,240 active personnel across 14 sites</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">construction</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="text-body-md font-bold">Machinery Up-time</span>
+<span class="text-label-md font-bold">92%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-low rounded-full">
+<div class="h-full bg-status-completed rounded-full" style="width: 92%"></div>
+</div>
+<p class="text-[10px] text-text-muted mt-1 font-medium">245 heavy equipment units operational</p>
+</div>
+</div>
+<div class="pt-4 flex gap-2">
+<div class="flex-1 p-3 border border-border-subtle rounded-xl text-center">
+<p class="text-label-sm text-text-muted uppercase">Shortage</p>
+<p class="text-body-lg font-bold text-error">12 Crane Ops</p>
+</div>
+<div class="flex-1 p-3 border border-border-subtle rounded-xl text-center">
+<p class="text-label-sm text-text-muted uppercase">Surplus</p>
+<p class="text-body-lg font-bold text-on-surface">5 Excavators</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Project Sites -->
+<div class="col-span-12 lg:col-span-7 bg-white rounded-xl border border-border-subtle shadow-sm flex flex-col">
+<div class="p-6 border-b border-border-subtle flex justify-between items-center">
+<h3 class="text-title-lg font-title-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant">location_on</span>
+                            Active Project Sites
+                        </h3>
+<span class="text-label-sm bg-surface-container-low px-2 py-1 rounded-md text-text-muted font-bold">14 ACTIVE</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-3 text-label-sm text-text-muted uppercase">Site Name</th>
+<th class="px-6 py-3 text-label-sm text-text-muted uppercase">Location</th>
+<th class="px-6 py-3 text-label-sm text-text-muted uppercase">Health</th>
+<th class="px-6 py-3 text-label-sm text-text-muted uppercase">Progress</th>
+<th class="px-6 py-3 text-label-sm text-text-muted uppercase">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-status-active"></div>
+<span class="text-body-md font-semibold text-on-surface">East River Bridge</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md text-text-muted">Section 4A</td>
+<td class="px-6 py-table-row-standard">
+<span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">Optimal</span>
+</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="flex-1 w-20 h-1.5 bg-surface-container-low rounded-full">
+<div class="h-full bg-status-active rounded-full" style="width: 72%"></div>
+</div>
+<span class="text-[11px] font-bold">72%</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard">
+<button class="p-1 hover:bg-surface-container-low rounded transition-colors">
+<span class="material-symbols-outlined text-text-muted">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-status-on-hold"></div>
+<span class="text-body-md font-semibold text-on-surface">Metro Tunnel A2</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md text-text-muted">Downtown Hub</td>
+<td class="px-6 py-table-row-standard">
+<span class="px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] font-bold uppercase tracking-wider">At Risk</span>
+</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="flex-1 w-20 h-1.5 bg-surface-container-low rounded-full">
+<div class="h-full bg-status-on-hold rounded-full" style="width: 45%"></div>
+</div>
+<span class="text-[11px] font-bold">45%</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard">
+<button class="p-1 hover:bg-surface-container-low rounded transition-colors">
+<span class="material-symbols-outlined text-text-muted">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-body-md font-semibold text-on-surface">Highway Inter. 89</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard text-body-md text-text-muted">North Bypass</td>
+<td class="px-6 py-table-row-standard">
+<span class="px-2 py-1 rounded-full bg-red-100 text-red-700 text-[10px] font-bold uppercase tracking-wider">Critical</span>
+</td>
+<td class="px-6 py-table-row-standard">
+<div class="flex items-center gap-2">
+<div class="flex-1 w-20 h-1.5 bg-surface-container-low rounded-full">
+<div class="h-full bg-error rounded-full" style="width: 28%"></div>
+</div>
+<span class="text-[11px] font-bold">28%</span>
+</div>
+</td>
+<td class="px-6 py-table-row-standard">
+<button class="p-1 hover:bg-surface-container-low rounded transition-colors">
+<span class="material-symbols-outlined text-text-muted">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Notification (Success of last planning action) -->
+<div class="fixed bottom-6 right-6 flex items-center gap-4 bg-primary text-white px-6 py-4 rounded-2xl shadow-xl animate-bounce-subtle z-50">
+<span class="material-symbols-outlined text-status-active">check_circle</span>
+<div class="text-label-md">
+<p class="font-bold">Project Plan Synced</p>
+<p class="text-[10px] opacity-80">All resource allocations updated successfully.</p>
+</div>
+<button class="ml-4 hover:opacity-70">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for the Gantt Chart hover
+        document.querySelectorAll('.gantt-grid .relative').forEach(bar => {
+            bar.addEventListener('mouseenter', () => {
+                bar.style.transform = 'scaleY(1.1)';
+                bar.style.transition = 'transform 0.2s ease';
+            });
+            bar.addEventListener('mouseleave', () => {
+                bar.style.transform = 'scaleY(1.0)';
+            });
+        });
+
+        // Add a subtle bounce animation for the notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce-subtle {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            .animate-bounce-subtle {
+                animation: bounce-subtle 4s infinite ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body></html>
