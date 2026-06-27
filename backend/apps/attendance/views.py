@@ -115,11 +115,12 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
                     logger.error(f"Image upload failed: {str(e)}")
             
             # Offload distance checking and status calculation to Celery
-            process_attendance_check_in.delay(str(attendance.id))
+            # We bypass Celery entirely and call it directly to avoid Redis connection errors on Render.
+            process_attendance_check_in(str(attendance.id))
             
             return Response({
                 "message": "Attendance check-in received and is being processed.",
-                "sync_id": attendance.sync_id,
+                "sync_id": str(attendance.sync_id),
                 "status": "Pending"
             }, status=status.HTTP_202_ACCEPTED)
         except Exception as e:
