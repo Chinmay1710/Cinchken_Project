@@ -138,12 +138,11 @@ CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/0
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
-import cloudinary
-cloudinary.config(
-    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME', 'test'),
-    api_key=os.getenv('CLOUDINARY_API_KEY', 'test'),
-    api_secret=os.getenv('CLOUDINARY_API_SECRET', 'test')
-)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME', 'test'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY', 'test'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET', 'test')
+}
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
