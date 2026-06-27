@@ -27,3 +27,4 @@ COPY . /app/
 RUN chmod +x /app/entrypoint.sh
 
 ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["gunicorn", "ck_infra_erp.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
