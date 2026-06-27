@@ -134,9 +134,10 @@ SIMPLE_JWT = {
 }
 
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/0')
+CELERY_RESULT_BACKEND = None
 # Force eager execution to prevent Redis connection timeouts from crashing the request
 CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_STORE_EAGER_RESULT = False
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
