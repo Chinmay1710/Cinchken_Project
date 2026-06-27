@@ -97,15 +97,21 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
         # Save record as Pending
         attendance = serializer.save(employee=target_user, work_date=today)
         
-        # Process image upload to local storage
+        # Process image upload to local storage or Cloudinary
         if 'selfie_image' in request.FILES:
             try:
                 image_file = request.FILES['selfie_image']
                 filename = default_storage.save(f"selfies/{image_file.name}", image_file)
-                attendance.selfie_image = f"http://localhost:8001{default_storage.url(filename)}"
+                file_url = default_storage.url(filename)
+                
+                # If not using Cloudinary (local dev fallback), prepend localhost
+                if not file_url.startswith('http'):
+                    file_url = f"http://localhost:8001{file_url}"
+                    
+                attendance.selfie_image = file_url
                 attendance.save()
             except Exception as e:
-                logger.error(f"Local upload failed: {str(e)}")
+                logger.error(f"Image upload failed: {str(e)}")
         
         # Offload distance checking and status calculation to Celery
         process_attendance_check_in.delay(attendance.id)
