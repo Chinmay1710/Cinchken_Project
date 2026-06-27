@@ -43,7 +43,17 @@ const Attendance = () => {
         const sitesData = Array.isArray(siteRes.data.results) ? siteRes.data.results : (Array.isArray(siteRes.data) ? siteRes.data : []);
         setSites(sitesData);
         if (sitesData.length > 0) {
-          setAssignedSite(sitesData[0]);
+          setAssignedSite(prev => {
+            if (!prev) {
+              const preferred = localStorage.getItem('preferredActiveSite');
+              if (preferred) {
+                const found = sitesData.find((s: any) => s.id === preferred);
+                if (found) return found;
+              }
+              return sitesData[0];
+            }
+            return prev;
+          });
         }
 
         const histRes = await api.get('/attendance/check-in/');
