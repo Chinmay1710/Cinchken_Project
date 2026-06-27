@@ -114,7 +114,7 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
                 logger.error(f"Image upload failed: {str(e)}")
         
         # Offload distance checking and status calculation to Celery
-        process_attendance_check_in.delay(attendance.id)
+        process_attendance_check_in.delay(str(attendance.id))
         
         return Response({
             "message": "Attendance check-in received and is being processed.",
