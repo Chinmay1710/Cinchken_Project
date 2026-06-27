@@ -94,30 +94,34 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
             attendance = serializer.save(employee=target_user, status=request.data.get('status', 'Present'), work_date=today)
             return Response({"message": "Attendance manually marked.", "status": attendance.status}, status=status.HTTP_201_CREATED)
         
-        # Save record as Pending
-        attendance = serializer.save(employee=target_user, work_date=today)
-        
-        # Process image upload to local storage or Cloudinary
-        if 'selfie_image' in request.FILES:
-            try:
-                image_file = request.FILES['selfie_image']
-                filename = default_storage.save(f"selfies/{image_file.name}", image_file)
-                file_url = default_storage.url(filename)
-                
-                # If not using Cloudinary (local dev fallback), prepend localhost
-                if not file_url.startswith('http'):
-                    file_url = f"http://localhost:8001{file_url}"
+        try:
+            # Save record as Pending
+            attendance = serializer.save(employee=target_user, work_date=today)
+            
+            # Process image upload to local storage or Cloudinary
+            if 'selfie_image' in request.FILES:
+                try:
+                    image_file = request.FILES['selfie_image']
+                    filename = default_storage.save(f"selfies/{image_file.name}", image_file)
+                    file_url = default_storage.url(filename)
                     
-                attendance.selfie_image = file_url
-                attendance.save()
-            except Exception as e:
-                logger.error(f"Image upload failed: {str(e)}")
-        
-        # Offload distance checking and status calculation to Celery
-        process_attendance_check_in.delay(str(attendance.id))
-        
-        return Response({
-            "message": "Attendance check-in received and is being processed.",
-            "sync_id": attendance.sync_id,
-            "status": "Pending"
-        }, status=status.HTTP_202_ACCEPTED)
+                    # If not using Cloudinary (local dev fallback), prepend localhost
+                    if not file_url.startswith('http'):
+                        file_url = f"http://localhost:8001{file_url}"
+                        
+                    attendance.selfie_image = file_url
+                    attendance.save()
+                except Exception as e:
+                    logger.error(f"Image upload failed: {str(e)}")
+            
+            # Offload distance checking and status calculation to Celery
+            process_attendance_check_in.delay(str(attendance.id))
+            
+            return Response({
+                "message": "Attendance check-in received and is being processed.",
+                "sync_id": attendance.sync_id,
+                "status": "Pending"
+            }, status=status.HTTP_202_ACCEPTED)
+        except Exception as e:
+            import traceback
+            return Response({"detail": str(e), "traceback": traceback.format_exc()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
