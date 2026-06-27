@@ -105,9 +105,9 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
                     filename = default_storage.save(f"selfies/{image_file.name}", image_file)
                     file_url = default_storage.url(filename)
                     
-                    # If not using Cloudinary (local dev fallback), prepend localhost
+                    # If not using Cloudinary (local dev fallback), use absolute URI
                     if not file_url.startswith('http'):
-                        file_url = f"http://localhost:8001{file_url}"
+                        file_url = request.build_absolute_uri(file_url)
                         
                     attendance.selfie_image = file_url
                     attendance.save()
