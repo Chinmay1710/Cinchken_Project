@@ -106,21 +106,27 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
                     file_url = None
                     
                     import os
-                    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
-                    api_key = os.getenv('CLOUDINARY_API_KEY')
-                    api_secret = os.getenv('CLOUDINARY_API_SECRET')
+                    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME', '').strip()
+                    api_key = os.getenv('CLOUDINARY_API_KEY', '').strip()
+                    api_secret = os.getenv('CLOUDINARY_API_SECRET', '').strip()
                     
                     if cloud_name and api_key and api_secret and cloud_name != 'test':
-                        import cloudinary
-                        import cloudinary.uploader
-                        
-                        cloudinary.config(
-                            cloud_name=cloud_name,
-                            api_key=api_key,
-                            api_secret=api_secret
-                        )
-                        upload_result = cloudinary.uploader.upload(image_file)
-                        file_url = upload_result.get('secure_url')
+                        try:
+                            import cloudinary
+                            import cloudinary.uploader
+                            
+                            cloudinary.config(
+                                cloud_name=cloud_name,
+                                api_key=api_key,
+                                api_secret=api_secret
+                            )
+                            upload_result = cloudinary.uploader.upload(image_file)
+                            file_url = upload_result.get('secure_url')
+                        except Exception as ce:
+                            logger.error(f"Cloudinary upload failed: {str(ce)}")
+                            image_error = str(ce)
+                            # Reset file pointer so local storage can read it
+                            image_file.seek(0)
                     
                     if not file_url:
                         # Fallback to local default_storage
@@ -132,8 +138,9 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
                     attendance.selfie_image = file_url
                     attendance.save()
                 except Exception as e:
-                    logger.error(f"Image upload failed: {str(e)}")
-                    image_error = str(e)
+                    logger.error(f"Image saving completely failed: {str(e)}")
+                    if not image_error:
+                        image_error = str(e)
             
             # Offload distance checking and status calculation to Celery
             # We bypass Celery entirely and call it directly to avoid Redis connection errors on Render.
