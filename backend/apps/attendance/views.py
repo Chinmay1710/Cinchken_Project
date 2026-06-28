@@ -99,6 +99,7 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
             attendance = serializer.save(employee=target_user, work_date=today)
             
             # Process image upload to local storage or Cloudinary
+            image_error = None
             if 'selfie_image' in request.FILES:
                 try:
                     image_file = request.FILES['selfie_image']
@@ -132,16 +133,21 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
                     attendance.save()
                 except Exception as e:
                     logger.error(f"Image upload failed: {str(e)}")
+                    image_error = str(e)
             
             # Offload distance checking and status calculation to Celery
             # We bypass Celery entirely and call it directly to avoid Redis connection errors on Render.
             process_attendance_check_in(str(attendance.id))
             
-            return Response({
+            response_data = {
                 "message": "Attendance check-in received and is being processed.",
                 "sync_id": str(attendance.sync_id),
                 "status": "Pending"
-            }, status=status.HTTP_202_ACCEPTED)
+            }
+            if image_error:
+                response_data["image_error"] = f"Cloudinary Upload Failed: {image_error}"
+                
+            return Response(response_data, status=status.HTTP_202_ACCEPTED)
         except Exception as e:
             import traceback
             return Response({"detail": str(e), "traceback": traceback.format_exc()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
