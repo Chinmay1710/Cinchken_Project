@@ -26,18 +26,34 @@ class DashboardStatsAPIView(APIView):
         # User/Employee Stats
         if site_id:
             from django.db.models import Q
-            total_employees = User.objects.filter(
+            total_employees_qs = User.objects.filter(
                 Q(site_engineer_assignments__site_id=site_id) | Q(site_assignments__site_id=site_id),
                 is_active=True
-            ).distinct().count()
+            ).distinct()
         else:
-            total_employees = User.objects.filter(is_active=True).count()
+            total_employees_qs = User.objects.filter(is_active=True)
+            
+        total_employees = total_employees_qs.count()
         
         att_qs = EmployeeAttendance.objects.filter(work_date=target_date, status__in=['Present', 'Late', 'Half-day'])
         if site_id:
             att_qs = att_qs.filter(site_id=site_id)
         present_employees = att_qs.count()
         absent_employees = total_employees - present_employees
+        late_arrivals = att_qs.filter(status='Late').count()
+        
+        # Calculate real Salary Expense
+        from django.db.models import Sum
+        salary_sum = total_employees_qs.aggregate(Sum('monthly_base_salary'))['monthly_base_salary__sum'] or 0
+        salary_sum = float(salary_sum)
+        if salary_sum >= 10000000:
+            formatted_salary = f"₹{salary_sum/10000000:.2f}Cr"
+        elif salary_sum >= 100000:
+            formatted_salary = f"₹{salary_sum/100000:.2f}L"
+        elif salary_sum >= 1000:
+            formatted_salary = f"₹{salary_sum/1000:.2f}k"
+        else:
+            formatted_salary = f"₹{int(salary_sum)}"
         
         # Site Stats
         active_sites = 1 if site_id else Site.objects.filter(is_active=True).count()
@@ -124,12 +140,12 @@ class DashboardStatsAPIView(APIView):
             'total_employees': total_employees,
             'present_employees': present_employees,
             'absent_employees': absent_employees,
-            'late_arrivals': 0,
+            'late_arrivals': late_arrivals,
             'active_sites': active_sites,
             'total_labour': total_labour,
             'labour_present': labour_present,
             'pending_leaves': 0,
-            'monthly_salary_expense': '$1.24M',
+            'monthly_salary_expense': formatted_salary,
             'labour_stats': labour_stats,
             'projects': projects,
             'activities': activities,
