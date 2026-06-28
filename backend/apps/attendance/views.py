@@ -102,13 +102,32 @@ class EmployeeAttendanceViewSet(viewsets.ModelViewSet):
             if 'selfie_image' in request.FILES:
                 try:
                     image_file = request.FILES['selfie_image']
-                    filename = default_storage.save(f"selfies/{image_file.name}", image_file)
-                    file_url = default_storage.url(filename)
+                    file_url = None
                     
-                    # If not using Cloudinary (local dev fallback), use absolute URI
-                    if not file_url.startswith('http'):
-                        file_url = request.build_absolute_uri(file_url)
+                    import os
+                    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+                    api_key = os.getenv('CLOUDINARY_API_KEY')
+                    api_secret = os.getenv('CLOUDINARY_API_SECRET')
+                    
+                    if cloud_name and api_key and api_secret and cloud_name != 'test':
+                        import cloudinary
+                        import cloudinary.uploader
                         
+                        cloudinary.config(
+                            cloud_name=cloud_name,
+                            api_key=api_key,
+                            api_secret=api_secret
+                        )
+                        upload_result = cloudinary.uploader.upload(image_file)
+                        file_url = upload_result.get('secure_url')
+                    
+                    if not file_url:
+                        # Fallback to local default_storage
+                        filename = default_storage.save(f"selfies/{image_file.name}", image_file)
+                        file_url = default_storage.url(filename)
+                        if not file_url.startswith('http'):
+                            file_url = request.build_absolute_uri(file_url)
+                            
                     attendance.selfie_image = file_url
                     attendance.save()
                 except Exception as e:
