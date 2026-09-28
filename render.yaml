@@ -1,11 +1,11 @@
-services:
+databases:
   # Database (PostgreSQL)
-  - type: psql
-    name: ck-infra-db
+  - name: ck-infra-db
     databaseName: ck_infra_db
     user: postgres
     plan: free
 
+services:
   # Redis
   - type: redis
     name: ck-infra-redis
