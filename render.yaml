@@ -1,0 +1,81 @@
+services:
+  # Database (PostgreSQL)
+  - type: psql
+    name: ck-infra-db
+    databaseName: ck_infra_db
+    user: postgres
+    plan: free
+
+  # Redis
+  - type: redis
+    name: ck-infra-redis
+    plan: free
+
+  # Backend Web Service
+  - type: web
+    name: backend-web
+    env: docker
+    rootDir: backend
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ck-infra-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: ck-infra-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: ck-infra-redis
+          property: connectionString
+
+  # Celery Worker
+  - type: worker
+    name: backend-celery
+    env: docker
+    rootDir: backend
+    dockerCommand: celery -A ck_infra_erp worker -l info
+    plan: starter # Workers are not available on the free tier
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ck-infra-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: ck-infra-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: ck-infra-redis
+          property: connectionString
+
+  # Celery Beat
+  - type: worker
+    name: backend-beat
+    env: docker
+    rootDir: backend
+    dockerCommand: celery -A ck_infra_erp beat -l info
+    plan: starter # Workers are not available on the free tier
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ck-infra-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: ck-infra-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: ck-infra-redis
+          property: connectionString
+
