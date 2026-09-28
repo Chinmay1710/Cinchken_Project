@@ -1,8 +1,6 @@
 databases:
   # Database (PostgreSQL)
   - name: ck-infra-db
-    databaseName: ck_infra_db
-    user: postgres
     plan: free
 
 services:
@@ -10,7 +8,7 @@ services:
   - type: redis
     name: ck-infra-redis
     plan: free
-
+    ipAllowList: []
   # Backend Web Service
   - type: web
     name: backend-web
