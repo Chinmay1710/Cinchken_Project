@@ -100,14 +100,15 @@ const Login: React.FC = () => {
       </div>
 
       {/* Right Side: Login Form */}
-      <div className="w-full md:w-5/12 bg-background flex flex-col items-center justify-center p-6 md:p-12 relative overflow-y-auto">
-        
-        {/* Mobile Logo */}
-        <div className="md:hidden mb-12 text-center">
-          <h2 className="font-headline-md text-headline-md text-primary font-bold">CK INFRA ERP</h2>
-        </div>
+      <div className="w-full h-full md:w-5/12 bg-background flex flex-col overflow-y-auto">
+        <div className="flex-1 flex flex-col justify-center items-center p-6 md:p-12 min-h-[650px] relative">
+          
+          {/* Mobile Logo */}
+          <div className="md:hidden mb-8 mt-4 text-center">
+            <h2 className="font-headline-md text-headline-md text-primary font-bold">CK INFRA ERP</h2>
+          </div>
 
-        <div className="w-full max-w-md bg-surface-container-lowest p-8 md:p-10 rounded-xl shadow-lg border border-border-subtle">
+          <div className="w-full max-w-md bg-surface-container-lowest p-6 sm:p-8 md:p-10 rounded-xl shadow-lg border border-border-subtle shrink-0">
           <div className="mb-10">
             <h2 className="font-headline-lg text-headline-lg text-text-main mb-2">Welcome Back</h2>
             <p className="font-body-md text-body-md text-text-muted">Enter your credentials to access the ERP dashboard.</p>
@@ -207,7 +208,7 @@ const Login: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="absolute bottom-8 w-full text-center px-6">
+        <footer className="w-full text-center px-6 py-6 mt-auto border-t border-border-subtle/50 bg-background/80 backdrop-blur-sm shrink-0">
           <p className="font-label-sm text-label-sm text-text-muted">
             © {currentYear} Cinch Ken Infrastructure. All rights reserved.
           </p>
@@ -217,6 +218,8 @@ const Login: React.FC = () => {
             <a className="font-label-sm text-label-sm text-text-muted hover:text-primary transition-colors" href="#">Terms of Service</a>
           </div>
         </footer>
+        
+        </div>
 
       </div>
     </div>

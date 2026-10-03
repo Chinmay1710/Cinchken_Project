@@ -147,14 +147,30 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET', 'test')
 }
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
-}
+USE_NEXTCLOUD_STORAGE = os.getenv('USE_NEXTCLOUD_STORAGE', 'False').lower() in ('true', '1', 't')
+WEBDAV_URL = os.getenv('NEXTCLOUD_WEBDAV_URL', '')
+WEBDAV_USERNAME = os.getenv('NEXTCLOUD_WEBDAV_USERNAME', '')
+WEBDAV_PASSWORD = os.getenv('NEXTCLOUD_WEBDAV_PASSWORD', '')
+
+if USE_NEXTCLOUD_STORAGE:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django_webdav_storage.storage.WebDavStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+else:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
